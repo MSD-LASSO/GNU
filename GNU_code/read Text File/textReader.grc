@@ -1,0 +1,478 @@
+<?xml version='1.0' encoding='utf-8'?>
+<?grc format='1' created='3.7.13'?>
+<flow_graph>
+  <timestamp>Sat Jan 25 12:48:53 2020</timestamp>
+  <block>
+    <key>options</key>
+    <param>
+      <key>author</key>
+      <value></value>
+    </param>
+    <param>
+      <key>window_size</key>
+      <value></value>
+    </param>
+    <param>
+      <key>category</key>
+      <value>[GRC Hier Blocks]</value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>description</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(8, 8)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>generate_options</key>
+      <value>qt_gui</value>
+    </param>
+    <param>
+      <key>hier_block_src_path</key>
+      <value>.:</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>top_block</value>
+    </param>
+    <param>
+      <key>max_nouts</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>qt_qss_theme</key>
+      <value></value>
+    </param>
+    <param>
+      <key>realtime_scheduling</key>
+      <value></value>
+    </param>
+    <param>
+      <key>run_command</key>
+      <value>{python} -u {filename}</value>
+    </param>
+    <param>
+      <key>run_options</key>
+      <value>prompt</value>
+    </param>
+    <param>
+      <key>run</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>sizing_mode</key>
+      <value>fixed</value>
+    </param>
+    <param>
+      <key>thread_safe_setters</key>
+      <value></value>
+    </param>
+    <param>
+      <key>title</key>
+      <value></value>
+    </param>
+    <param>
+      <key>placement</key>
+      <value>(0,0)</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(8, 300)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>baseFrequency</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>TextFileReader.read(2)</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(16, 524)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>endDate</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>TextFileReader.read(5)</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(16, 452)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>errorInTime</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>TextFileReader.read(4)</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(8, 228)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>noradID</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>TextFileReader.read(1)</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>comment</key>
+      <value>This should be a list of nominal frequencies in one Access.
+
+TODO figure out how to access it</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(328, 228)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>noradID_0</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>DopplerShiftReader.read(noradID)</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(8, 380)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>timeInterval</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>TextFileReader.read(3)</value>
+    </param>
+  </block>
+  <block>
+    <key>epy_module</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>source_code</key>
+      <value># this module will be imported in the into your flowgraph&#13;
+import os&#13;
+import re&#13;
+from datetime import datetime&#13;
+import numpy&#13;
+&#13;
+# As written, this program reads the text 5 five times to get all the variables. Using global variables is another&#13;
+# option that's just as nonideal. Maybe something in GNU makes this easier?&#13;
+def read(noradID) :&#13;
+    file1=open("C:/Users/Acer/Desktop/MSD/GNU/FeasibilityStudies/GNU/read Text File/DopplerAccess"+noradID+".txt")&#13;
+    # transform cannot do decimals or dates.&#13;
+&#13;
+    file1.readline()&#13;
+    endofAccess=False&#13;
+    counter=0&#13;
+    time=[]&#13;
+    freqNominal=[]&#13;
+    frequnder=[]&#13;
+    freqover=[]&#13;
+&#13;
+    while not endofAccess:&#13;
+        string=file1.readline()&#13;
+        if "Access" in string :&#13;
+            endofAccess=True&#13;
+        else:&#13;
+            string=remove_from_end(string,2)&#13;
+            splitstrings=string.split("     ")&#13;
+            # return splitstrings[0]&#13;
+            # time[counter]=getDate(splitstrings[0])&#13;
+            # freqNominal[counter]=transform(splitstrings[1])&#13;
+            # frequnder[counter]=transform(splitstrings[2])&#13;
+            # freqover[counter]=transform(splitstrings[3])&#13;
+            time.append(getDate(splitstrings[0]))&#13;
+            freqNominal.append(transform(splitstrings[1]))&#13;
+            frequnder.append(transform(splitstrings[2]))&#13;
+            freqover.append(transform(splitstrings[3]))&#13;
+            counter=counter+1&#13;
+&#13;
+    return freqNominal&#13;
+&#13;
+&#13;
+&#13;
+&#13;
+&#13;
+&#13;
+    # noradID=transform(file1.readline())&#13;
+    # baseFreq=transform(file1.readline())&#13;
+    # timeInterval=transform(file1.readline())&#13;
+    # endTimeAsString=file1.readline()&#13;
+    # errorTime=transform(file1.readline())&#13;
+    #&#13;
+    # endDate=getDate(endTimeAsString)&#13;
+    #&#13;
+    #&#13;
+    #&#13;
+    # if ID == 1:&#13;
+    #     return noradID&#13;
+    # elif ID==2:&#13;
+    #     return baseFreq&#13;
+    # elif ID==3:&#13;
+    #     return timeInterval&#13;
+    # elif ID==4:&#13;
+    #     return errorTime&#13;
+    # elif ID==5:&#13;
+    #     return endDate&#13;
+    #&#13;
+    # return endDate&#13;
+&#13;
+&#13;
+def transform(stringToRead):&#13;
+    # see https://www.tutorialspoint.com/How-to-extract-numbers-from-a-string-in-Python&#13;
+    [float(s) for s in re.findall(r'-?\d+\.?\d*', stringToRead)]&#13;
+    return s&#13;
+&#13;
+&#13;
+# Needs further research to get this working flawlessly.&#13;
+def getDate(stringToRead):&#13;
+    # endTime=2020-01-19T10:20:03.000:-15:45&#13;
+    # stringToRead=remove_prefix(stringToRead,"endTime=")&#13;
+&#13;
+    # TODO explore this more. I don't know if this is just a windows thing, but I can't read the time zone with %z&#13;
+    # stringToRead=remove_from_end(stringToRead,8)&#13;
+&#13;
+    return datetime.strptime(stringToRead,"%Y-%m-%dT%H:%M:%S.%f")&#13;
+    # return datetime.strptime(stringToRead,"%Y-%m-%dT%H:%M:%S.%f:%z")&#13;
+&#13;
+# https://stackoverflow.com/questions/16891340/remove-a-prefix-from-a-string&#13;
+def remove_prefix(string, prefix):&#13;
+    return string[string.startswith(prefix) and len(prefix):]&#13;
+&#13;
+def remove_from_end(string, num):&#13;
+    return string[:-num]</value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value>Contains text reader for DopperAccessXXXXX.txt
+See below for read variables:
+
+Current Issues:</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(336, 68)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>DopplerShiftReader</value>
+    </param>
+  </block>
+  <block>
+    <key>epy_module</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>source_code</key>
+      <value># this module will be imported in the into your flowgraph&#13;
+import os&#13;
+import re&#13;
+from datetime import datetime&#13;
+&#13;
+text="./LASSO_INPUT.txt"&#13;
+&#13;
+&#13;
+# As written, this program reads the text 5 five times to get all the variables. Using global variables is another&#13;
+# option that's just as nonideal. Maybe something in GNU makes this easier?&#13;
+def read(ID) :&#13;
+    file1=open("C:/Users/Acer/Desktop/MSD/GNU/FeasibilityStudies/GNU/read Text File/LASSO_INPUT.txt")&#13;
+    # transform cannot do decimals or dates.&#13;
+&#13;
+    noradID=transform(file1.readline())&#13;
+    baseFreq=transform(file1.readline())&#13;
+    timeInterval=transform(file1.readline())&#13;
+    endTimeAsString=file1.readline()&#13;
+    errorTime=transform(file1.readline())&#13;
+&#13;
+    endDate=getDate(endTimeAsString)&#13;
+&#13;
+&#13;
+&#13;
+    if ID == 1:&#13;
+        return noradID&#13;
+    elif ID==2:&#13;
+        return baseFreq&#13;
+    elif ID==3:&#13;
+        return timeInterval&#13;
+    elif ID==4:&#13;
+        return errorTime&#13;
+    elif ID==5:&#13;
+        return endDate&#13;
+    #&#13;
+    # return endDate&#13;
+&#13;
+&#13;
+def transform(stringToRead):&#13;
+    # see https://www.tutorialspoint.com/How-to-extract-numbers-from-a-string-in-Python&#13;
+    [float(s) for s in re.findall(r'-?\d+\.?\d*', stringToRead)]&#13;
+    return s&#13;
+&#13;
+&#13;
+# Needs further research to get this working flawlessly.&#13;
+def getDate(stringToRead):&#13;
+    # endTime=2020-01-19T10:20:03.000:-15:45&#13;
+    stringToRead=remove_prefix(stringToRead,"endTime=")&#13;
+&#13;
+    # TODO explore this more. I don't know if this is just a windows thing, but I can't read the time zone with %z&#13;
+    stringToRead=remove_from_end(stringToRead,8)&#13;
+&#13;
+    return datetime.strptime(stringToRead,"%Y-%m-%dT%H:%M:%S.%f")&#13;
+    # return datetime.strptime(stringToRead,"%Y-%m-%dT%H:%M:%S.%f:%z")&#13;
+&#13;
+# https://stackoverflow.com/questions/16891340/remove-a-prefix-from-a-string&#13;
+def remove_prefix(string, prefix):&#13;
+    return string[string.startswith(prefix) and len(prefix):]&#13;
+&#13;
+def remove_from_end(string, num):&#13;
+    return string[:-num]</value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value>Contains text reader for LASSO_Input.txt
+See below for read variables:
+
+Current Issues:
+1. Reads text files 5 times to get each variable.
+2. Not getting timezone correctly. Might be a windows
+    problem...need to test in Lunux</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(16, 76)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>TextFileReader</value>
+    </param>
+  </block>
+</flow_graph>
