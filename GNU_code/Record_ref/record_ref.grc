@@ -796,7 +796,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>162000000</value>
+      <value>433000000</value>
     </param>
   </block>
   <block>
@@ -843,7 +843,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>162400000</value>
+      <value>433300000</value>
     </param>
   </block>
   <block>
@@ -2600,7 +2600,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>20000000</value>
+      <value>2000000</value>
     </param>
   </block>
   <block>
