@@ -27,8 +27,8 @@ if __name__=='__main__':
     Date=[]
     Doppler=[]
     import csv
-    with open('./Dummy.txt') as f:
-    # with open('./DopplerAccess35932.txt') as f:
+    # with open('./Dummy.txt') as f:
+    with open('./DopplerAccess35932.txt') as f:
         reader=csv.reader(f,delimiter='\t')
         for row in reader:
             Str=str.split(row[0],"    ")
