@@ -12,8 +12,8 @@ def my_job(Doppler):
     # sched.remove_job('job'+str(count))
     # count+=1
     # os.system('date')
-    print('python record_ref.py --channel-freq='+str(int(round(Doppler*1e6)))+' --samp-rate=2000000 --center-freq=437 --num-samples=6000000 --file-loc="/home/pi/Documents/Time'+str(datetime.now())+'"')
-    os.system('python record_ref.py --channel-freq='+str(int(round(Doppler*1e6)))+' --samp-rate=2000000 --center-freq=437 --num-samples=6000000 --file-loc="/home/pi/Documents/Time"'+str(datetime.now()))
+    print('python record_ref.py --channel-freq='+str(int(round(Doppler*1e6)))+' --samp-rate=2000000 --center-freq=437 --num-samples=6000000 --file-loc="/home/pi/Documents/Time'+str(datetime.now()).replace(" ","_").replace(":","_").replace(".","_")+'"')
+    os.system('python record_ref.py --channel-freq='+str(int(round(Doppler*1e6)))+' --samp-rate=2000000 --center-freq=437 --num-samples=6000000 --file-loc="/home/pi/Documents/Time"'+str(datetime.now()).replace(" ","_").replace(":","_").replace(".","_")+'"')
 
 #https://stackoverflow.com/questions/4770297/convert-utc-datetime-string-to-local-datetime
 def utc2local(utc):
