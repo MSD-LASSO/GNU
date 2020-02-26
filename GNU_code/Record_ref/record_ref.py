@@ -6,36 +6,22 @@
 # GNU Radio version: 3.7.13.5
 ##################################################
 
-if __name__ == '__main__':
-    import ctypes
-    import sys
-    if sys.platform.startswith('linux'):
-        try:
-            x11 = ctypes.cdll.LoadLibrary('libX11.so')
-            x11.XInitThreads()
-        except:
-            print "Warning: failed to XInitThreads()"
-
 from gnuradio import analog
 from gnuradio import blocks
 from gnuradio import eng_notation
 from gnuradio import gr
 from gnuradio.eng_option import eng_option
 from gnuradio.filter import firdes
-from grc_gnuradio import wxgui as grc_wxgui
 from optparse import OptionParser
 import datetime
 import osmosdr
 import time
-import wx
 
 
-class record_ref(grc_wxgui.top_block_gui):
+class record_ref(gr.top_block):
 
-    def __init__(self, center_freq=162000000, channel_freq=162400000, file_loc='', num_samples=10000000, samp_rate=2000000):
-        grc_wxgui.top_block_gui.__init__(self, title="Record Ref")
-        _icon_path = "C:\Program Files\GNURadio-3.7\share\icons\hicolor\scalable/apps\gnuradio-grc.png"
-        self.SetIcon(wx.Icon(_icon_path, wx.BITMAP_TYPE_ANY))
+    def __init__(self, center_freq=97000000, channel_freq=97900000, file_loc='', num_samples=10000000, samp_rate=2000000):
+        gr.top_block.__init__(self, "Record Ref")
 
         ##################################################
         # Parameters
@@ -50,8 +36,6 @@ class record_ref(grc_wxgui.top_block_gui):
         # Blocks
         ##################################################
         self.osmosdr_source_0 = osmosdr.source( args="numchan=" + str(1) + " " + 'hackrf=0,bias=1' )
-        self.osmosdr_source_0.set_clock_source('gpsdo', 0)
-        self.osmosdr_source_0.set_time_source('gpsdo', 0)
         self.osmosdr_source_0.set_time_now(osmosdr.time_spec_t(time.time()), osmosdr.ALL_MBOARDS)
         self.osmosdr_source_0.set_sample_rate(samp_rate)
         self.osmosdr_source_0.set_center_freq(center_freq, 0)
@@ -121,10 +105,10 @@ class record_ref(grc_wxgui.top_block_gui):
 def argument_parser():
     parser = OptionParser(usage="%prog: [options]", option_class=eng_option)
     parser.add_option(
-        "", "--center-freq", dest="center_freq", type="intx", default=162000000,
+        "", "--center-freq", dest="center_freq", type="intx", default=97000000,
         help="Set center_freq [default=%default]")
     parser.add_option(
-        "", "--channel-freq", dest="channel_freq", type="intx", default=162400000,
+        "", "--channel-freq", dest="channel_freq", type="intx", default=97900000,
         help="Set channel_freq [default=%default]")
     parser.add_option(
         "", "--file-loc", dest="file_loc", type="string", default='',
@@ -143,8 +127,8 @@ def main(top_block_cls=record_ref, options=None):
         options, _ = argument_parser().parse_args()
 
     tb = top_block_cls(center_freq=options.center_freq, channel_freq=options.channel_freq, file_loc=options.file_loc, num_samples=options.num_samples, samp_rate=options.samp_rate)
-    tb.Start(True)
-    tb.Wait()
+    tb.start()
+    tb.wait()
 
 
 if __name__ == '__main__':
