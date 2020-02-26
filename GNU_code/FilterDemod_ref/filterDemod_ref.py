@@ -6,27 +6,44 @@
 # GNU Radio version: 3.7.13.5
 ##################################################
 
-from gnuradio import analog
+if __name__ == '__main__':
+    import ctypes
+    import sys
+    if sys.platform.startswith('linux'):
+        try:
+            x11 = ctypes.cdll.LoadLibrary('libX11.so')
+            x11.XInitThreads()
+        except:
+            print "Warning: failed to XInitThreads()"
+
 from gnuradio import blocks
 from gnuradio import eng_notation
-from gnuradio import filter
 from gnuradio import gr
+from gnuradio import wxgui
 from gnuradio.eng_option import eng_option
+from gnuradio.fft import window
 from gnuradio.filter import firdes
+from gnuradio.wxgui import fftsink2
+from gnuradio.wxgui import waterfallsink2
+from grc_gnuradio import wxgui as grc_wxgui
 from optparse import OptionParser
 import pmt
+import wx
 
 
-class filterDemod_ref(gr.top_block):
+class filterDemod_ref(grc_wxgui.top_block_gui):
 
-    def __init__(self, cutoff_freq=12000, decimation=1, num_samples=10000000, samp_rate=2000000, save_file='', source_file='', trans_width=2000):
-        gr.top_block.__init__(self, "Filterdemod Ref")
+    def __init__(self, cutoff_freq=20000, decimation=1, gain=2, num_samples=10000000, samp_rate=2000000, save_file='', source_file='', trans_width=2000):
+        grc_wxgui.top_block_gui.__init__(self, title="Filterdemod Ref")
+        _icon_path = "C:\Program Files\GNURadio-3.7\share\icons\hicolor\scalable/apps\gnuradio-grc.png"
+        self.SetIcon(wx.Icon(_icon_path, wx.BITMAP_TYPE_ANY))
 
         ##################################################
         # Parameters
         ##################################################
         self.cutoff_freq = cutoff_freq
         self.decimation = decimation
+        self.gain = gain
         self.num_samples = num_samples
         self.samp_rate = samp_rate
         self.save_file = save_file
@@ -36,37 +53,54 @@ class filterDemod_ref(gr.top_block):
         ##################################################
         # Blocks
         ##################################################
-        self.low_pass_filter_0_1 = filter.fir_filter_ccf(decimation, firdes.low_pass(
-        	1, samp_rate, cutoff_freq, trans_width, firdes.WIN_HAMMING, 6.76))
-        self.blocks_wavfile_sink_0 = blocks.wavfile_sink('C:\\Users\\devri\\Documents\\RIT\\Sixth Semester\\MSD I\\GIT\\readInData\\filterDemodData\\pi_2_ref_sig_filter_demod_10.wav', 1, samp_rate, 8)
-        self.blocks_throttle_0 = blocks.throttle(gr.sizeof_gr_complex*1, samp_rate,True)
-        self.blocks_multiply_const_vxx_0 = blocks.multiply_const_vff((2, ))
-        self.blocks_head_0 = blocks.head(gr.sizeof_float*1, num_samples)
-        self.blocks_file_source_0 = blocks.file_source(gr.sizeof_gr_complex*1, 'C:\\Users\\devri\\Documents\\RIT\\Sixth Semester\\MSD I\\GIT\\readInData\\Data\\pi_2_ref_sig_10', True)
-        self.blocks_file_source_0.set_begin_tag(pmt.PMT_NIL)
-        self.analog_wfm_rcv_0 = analog.wfm_rcv(
-        	quad_rate=2e6,
-        	audio_decimation=1,
+        self.wxgui_waterfallsink2_0 = waterfallsink2.waterfall_sink_c(
+        	self.GetWin(),
+        	baseband_freq=0,
+        	dynamic_range=100,
+        	ref_level=0,
+        	ref_scale=2.0,
+        	sample_rate=samp_rate,
+        	fft_size=512,
+        	fft_rate=15,
+        	average=False,
+        	avg_alpha=None,
+        	title='Waterfall Plot',
         )
+        self.Add(self.wxgui_waterfallsink2_0.win)
+        self.wxgui_fftsink2_0 = fftsink2.fft_sink_c(
+        	self.GetWin(),
+        	baseband_freq=0,
+        	y_per_div=10,
+        	y_divs=10,
+        	ref_level=0,
+        	ref_scale=2.0,
+        	sample_rate=samp_rate,
+        	fft_size=1024,
+        	fft_rate=15,
+        	average=False,
+        	avg_alpha=None,
+        	title='FFT Plot',
+        	peak_hold=False,
+        )
+        self.Add(self.wxgui_fftsink2_0.win)
+        self.blocks_throttle_0 = blocks.throttle(gr.sizeof_gr_complex*1, samp_rate,True)
+        self.blocks_file_source_0 = blocks.file_source(gr.sizeof_gr_complex*1, 'C:\\Users\\devri\\Documents\\RIT\\Sixth Semester\\MSD I\\GIT\\GNU_non_git\\Pi2_outsideTest\\Time2020-02-22_18_11_35_114423', True)
+        self.blocks_file_source_0.set_begin_tag(pmt.PMT_NIL)
 
 
 
         ##################################################
         # Connections
         ##################################################
-        self.connect((self.analog_wfm_rcv_0, 0), (self.blocks_multiply_const_vxx_0, 0))
         self.connect((self.blocks_file_source_0, 0), (self.blocks_throttle_0, 0))
-        self.connect((self.blocks_head_0, 0), (self.blocks_wavfile_sink_0, 0))
-        self.connect((self.blocks_multiply_const_vxx_0, 0), (self.blocks_head_0, 0))
-        self.connect((self.blocks_throttle_0, 0), (self.low_pass_filter_0_1, 0))
-        self.connect((self.low_pass_filter_0_1, 0), (self.analog_wfm_rcv_0, 0))
+        self.connect((self.blocks_throttle_0, 0), (self.wxgui_fftsink2_0, 0))
+        self.connect((self.blocks_throttle_0, 0), (self.wxgui_waterfallsink2_0, 0))
 
     def get_cutoff_freq(self):
         return self.cutoff_freq
 
     def set_cutoff_freq(self, cutoff_freq):
         self.cutoff_freq = cutoff_freq
-        self.low_pass_filter_0_1.set_taps(firdes.low_pass(1, self.samp_rate, self.cutoff_freq, self.trans_width, firdes.WIN_HAMMING, 6.76))
 
     def get_decimation(self):
         return self.decimation
@@ -74,19 +108,25 @@ class filterDemod_ref(gr.top_block):
     def set_decimation(self, decimation):
         self.decimation = decimation
 
+    def get_gain(self):
+        return self.gain
+
+    def set_gain(self, gain):
+        self.gain = gain
+
     def get_num_samples(self):
         return self.num_samples
 
     def set_num_samples(self, num_samples):
         self.num_samples = num_samples
-        self.blocks_head_0.set_length(self.num_samples)
 
     def get_samp_rate(self):
         return self.samp_rate
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.low_pass_filter_0_1.set_taps(firdes.low_pass(1, self.samp_rate, self.cutoff_freq, self.trans_width, firdes.WIN_HAMMING, 6.76))
+        self.wxgui_waterfallsink2_0.set_sample_rate(self.samp_rate)
+        self.wxgui_fftsink2_0.set_sample_rate(self.samp_rate)
         self.blocks_throttle_0.set_sample_rate(self.samp_rate)
 
     def get_save_file(self):
@@ -106,17 +146,19 @@ class filterDemod_ref(gr.top_block):
 
     def set_trans_width(self, trans_width):
         self.trans_width = trans_width
-        self.low_pass_filter_0_1.set_taps(firdes.low_pass(1, self.samp_rate, self.cutoff_freq, self.trans_width, firdes.WIN_HAMMING, 6.76))
 
 
 def argument_parser():
     parser = OptionParser(usage="%prog: [options]", option_class=eng_option)
     parser.add_option(
-        "", "--cutoff-freq", dest="cutoff_freq", type="intx", default=12000,
+        "", "--cutoff-freq", dest="cutoff_freq", type="intx", default=20000,
         help="Set cutoff_freq [default=%default]")
     parser.add_option(
         "", "--decimation", dest="decimation", type="intx", default=1,
         help="Set decimation [default=%default]")
+    parser.add_option(
+        "", "--gain", dest="gain", type="intx", default=2,
+        help="Set gain [default=%default]")
     parser.add_option(
         "", "--num-samples", dest="num_samples", type="intx", default=10000000,
         help="Set num_samples [default=%default]")
@@ -139,9 +181,9 @@ def main(top_block_cls=filterDemod_ref, options=None):
     if options is None:
         options, _ = argument_parser().parse_args()
 
-    tb = top_block_cls(cutoff_freq=options.cutoff_freq, decimation=options.decimation, num_samples=options.num_samples, samp_rate=options.samp_rate, save_file=options.save_file, source_file=options.source_file, trans_width=options.trans_width)
-    tb.start()
-    tb.wait()
+    tb = top_block_cls(cutoff_freq=options.cutoff_freq, decimation=options.decimation, gain=options.gain, num_samples=options.num_samples, samp_rate=options.samp_rate, save_file=options.save_file, source_file=options.source_file, trans_width=options.trans_width)
+    tb.Start(True)
+    tb.Wait()
 
 
 if __name__ == '__main__':
