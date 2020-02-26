@@ -51,7 +51,7 @@ class record_ref(gr.top_block):
 
         self.blocks_multiply_xx_0 = blocks.multiply_vcc(1)
         self.blocks_head_0 = blocks.head(gr.sizeof_gr_complex*1, num_samples)
-        self.blocks_file_sink_1 = blocks.file_sink(gr.sizeof_gr_complex*1, 'file_loc+"END:"+datetime.datetime.now()', False)
+        self.blocks_file_sink_1 = blocks.file_sink(gr.sizeof_gr_complex*1, file_loc+"_END_"+str(datetime.datetime.now()).replace(" ","_").replace(":","_").replace(".","_"), False)
         self.blocks_file_sink_1.set_unbuffered(False)
         self.analog_sig_source_x_0 = analog.sig_source_c(samp_rate, analog.GR_COS_WAVE, center_freq - channel_freq, 1, 0)
 
@@ -85,6 +85,7 @@ class record_ref(gr.top_block):
 
     def set_file_loc(self, file_loc):
         self.file_loc = file_loc
+        self.blocks_file_sink_1.open(self.file_loc+"_END_"+str(datetime.datetime.now()).replace(" ","_").replace(":","_").replace(".","_"))
 
     def get_num_samples(self):
         return self.num_samples
