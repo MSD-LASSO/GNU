@@ -52,8 +52,8 @@ if __name__=='__main__':
     for Str in Date:
         h1=datetime.strptime(Str,"%Y-%m-%dT%H:%M:%S.%f")
         print("Before Schedule utc: "+str(h1))
-        h1=utc2local(h1)
-        print("Before Schedule local: "+str(h1))
+        # h1=utc2local(h1)
+        # print("Before Schedule local: "+str(h1))
         # sched.add_job(my_job,'date',run_date=h1,id='job'+str(count))
         sched.add_job(my_job,'date',run_date=h1,args=[Doppler[count]])
         count+=1
