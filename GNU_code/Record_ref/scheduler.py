@@ -19,7 +19,7 @@ def my_job(Doppler):
     time.sleep(10)
     # String="date >> /home/pi/Documents/TimingTest.txt 2>&1"
     String=datetime.now()
-    print(String)
+    print(str(String))
     # os.system(String)
 
 #https://stackoverflow.com/questions/4770297/convert-utc-datetime-string-to-local-datetime
