@@ -10,6 +10,7 @@ from gnuradio import analog
 from gnuradio import blocks
 from gnuradio import eng_notation
 from gnuradio import gr
+from gnuradio import gr, blocks
 from gnuradio.eng_option import eng_option
 from gnuradio.filter import firdes
 from optparse import OptionParser
@@ -36,6 +37,8 @@ class record_ref(gr.top_block):
         # Blocks
         ##################################################
         self.osmosdr_source_0 = osmosdr.source( args="numchan=" + str(1) + " " + 'hackrf=0,bias=1' )
+        self.osmosdr_source_0.set_clock_source('external', 0)
+        self.osmosdr_source_0.set_time_source('external', 0)
         self.osmosdr_source_0.set_time_now(osmosdr.time_spec_t(time.time()), osmosdr.ALL_MBOARDS)
         self.osmosdr_source_0.set_sample_rate(samp_rate)
         self.osmosdr_source_0.set_center_freq(center_freq, 0)
@@ -51,8 +54,8 @@ class record_ref(gr.top_block):
 
         self.blocks_multiply_xx_0 = blocks.multiply_vcc(1)
         self.blocks_head_0 = blocks.head(gr.sizeof_gr_complex*1, num_samples)
-        self.blocks_file_sink_1 = blocks.file_sink(gr.sizeof_gr_complex*1, file_loc+"_END_"+str(datetime.datetime.now()).replace(" ","_").replace(":","_").replace(".","_"), False)
-        self.blocks_file_sink_1.set_unbuffered(False)
+        self.blocks_file_meta_sink_0 = blocks.file_meta_sink(gr.sizeof_gr_complex*1, file_loc+"_META_END_"+str(datetime.datetime.now()).replace(" ","_").replace(":","_").replace(".","_"), samp_rate, 1, blocks.GR_FILE_FLOAT, True, 1000000, "", True)
+        self.blocks_file_meta_sink_0.set_unbuffered(False)
         self.analog_sig_source_x_0 = analog.sig_source_c(samp_rate, analog.GR_COS_WAVE, center_freq - channel_freq, 1, 0)
 
 
@@ -61,7 +64,7 @@ class record_ref(gr.top_block):
         # Connections
         ##################################################
         self.connect((self.analog_sig_source_x_0, 0), (self.blocks_multiply_xx_0, 1))
-        self.connect((self.blocks_head_0, 0), (self.blocks_file_sink_1, 0))
+        self.connect((self.blocks_head_0, 0), (self.blocks_file_meta_sink_0, 0))
         self.connect((self.blocks_multiply_xx_0, 0), (self.blocks_head_0, 0))
         self.connect((self.osmosdr_source_0, 0), (self.blocks_multiply_xx_0, 0))
 
@@ -85,7 +88,7 @@ class record_ref(gr.top_block):
 
     def set_file_loc(self, file_loc):
         self.file_loc = file_loc
-        self.blocks_file_sink_1.open(self.file_loc+"_END_"+str(datetime.datetime.now()).replace(" ","_").replace(":","_").replace(".","_"))
+        self.blocks_file_meta_sink_0.open(self.file_loc+"_META_END_"+str(datetime.datetime.now()).replace(" ","_").replace(":","_").replace(".","_"))
 
     def get_num_samples(self):
         return self.num_samples
