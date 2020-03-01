@@ -1,6 +1,7 @@
 from datetime import datetime, date, time
 import time
 from apscheduler.schedulers.blocking import BlockingScheduler
+from apscheduler.schedulers.background import BackgroundScheduler
 import os
 
 
@@ -29,7 +30,8 @@ def utc2local(utc):
     return utc + offset
 
 if __name__=='__main__':
-    sched = BlockingScheduler()
+    # sched = BlockingScheduler()
+    sched = BackgroundScheduler()
 
     Date=[]
     Doppler=[]
