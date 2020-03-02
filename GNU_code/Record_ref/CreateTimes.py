@@ -9,12 +9,12 @@ from optparse import OptionParser
 def createText(startTime,interval,numEntries):
     f = open("./InputTimes.txt", "w+")
 
-    f.write(startTime+'\n')
+    f.write(startTime+'     '+'437.0000000000'+'\n')
 
     dateObj=dt.strptime(startTime, "%Y-%m-%dT%H:%M:%S.%f")
     for i in range(numEntries):
         dateObj+= bigDT.timedelta(seconds=interval)
-        f.write(str(dateObj.date())+'T'+str(dateObj.time()) + '\n')
+        f.write(str(dateObj.date())+'T'+str(dateObj.time()) +'     '+'437.0000000000'+ '\n')
 
 
     # f.write('%f' % x.Lat + ' %f' % x.Lon + ' %f' % x.Alt + ' %0.f:' % x.Time_H + '%0.f:' % x.Time_M + '%.2f' % x.Time_S + '\n')
