@@ -24,6 +24,7 @@ def my_job(Doppler):
     # print(str(String))
     # os.system(String)
     f.write(datetime.now()+'\n')
+    f.close()
 
 #https://stackoverflow.com/questions/4770297/convert-utc-datetime-string-to-local-datetime
 def utc2local(utc):
@@ -70,5 +71,6 @@ if __name__=='__main__':
         count+=1
     # sched.add_job(my_job, 'date', run_date=datetime(2020, 2, 22, 12, 36, 33,43534), args=['testing'])
 
+    f.close()
     # count=0
     sched.start()
