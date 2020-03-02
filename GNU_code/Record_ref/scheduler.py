@@ -7,6 +7,7 @@ import os
 
 
 def my_job(Doppler):
+    f = open("/home/pi/Documents/OutputTimes.txt", "a")
     # print(text)
     # global sched, count
     # print(datetime.now())
@@ -18,10 +19,11 @@ def my_job(Doppler):
     # String='python /home/pi/GIT_GNU/GNU/GNU_code/Record_ref/record_ref.py --channel-freq='+'97900000'+' --samp-rate=2000000 --center-freq=97000000 --num-samples=10000000 --file-loc="/home/pi/Documents/Time'+str(datetime.now()).replace(" ","_").replace(":","_").replace(".","_")+'"'
 
     time.sleep(10)
-    String="date >> /home/pi/Documents/TimingTest.txt 2>&1"
+    # String="date >> /home/pi/Documents/TimingTest.txt 2>&1"
     # String=datetime.now()
     # print(str(String))
-    os.system(String)
+    # os.system(String)
+    f.write(datetime.now()+'\n')
 
 #https://stackoverflow.com/questions/4770297/convert-utc-datetime-string-to-local-datetime
 def utc2local(utc):
@@ -53,10 +55,14 @@ if __name__=='__main__':
     # stringAry=["2020-02-22T18:25:32.436","2020-02-22T18:25:46.352"]
 
     # The job will be executed on November 6th, 2009
+    f = open("/home/pi/Documents/OutputTimes.txt", "w+")
+
     count=0
     for Str in Date:
         h1=datetime.strptime(Str,"%Y-%m-%dT%H:%M:%S.%f")
-        print("Before Schedule utc: "+str(h1))
+        outStr="Before Schedule utc: "+str(h1)
+        print(outStr)
+        f.write(outStr)
         # h1=utc2local(h1)
         # print("Before Schedule local: "+str(h1))
         # sched.add_job(my_job,'date',run_date=h1,id='job'+str(count))
