@@ -37,7 +37,7 @@ if __name__=='__main__':
     Doppler=[]
     import csv
     # with open('/home/pi/GIT_GNU/GNU/GNU_code/Record_ref/Dummy.txt') as f:
-    with open('/home/pi/GIT_GNU/GNU/GNU_code/Record_ref/DopplerAccess35932.txt') as f:
+    with open('/home/pi/GIT_GNU/GNU/GNU_code/Record_ref/InputTimes.txt') as f:
         reader=csv.reader(f,delimiter='\t')
         for row in reader:
             Str=str.split(row[0],"    ")
