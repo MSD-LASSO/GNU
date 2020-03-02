@@ -8,6 +8,7 @@ import os
 
 def my_job(Doppler):
     f = open("/home/pi/Documents/OutputTimes.txt", "a")
+    print(f)
     # print(text)
     # global sched, count
     # print(datetime.now())
@@ -23,6 +24,7 @@ def my_job(Doppler):
     # String=datetime.now()
     # print(str(String))
     # os.system(String)
+    print(datetime.now())
     f.write(datetime.now()+'\n')
     f.close()
 
@@ -63,7 +65,7 @@ if __name__=='__main__':
         h1=datetime.strptime(Str,"%Y-%m-%dT%H:%M:%S.%f")
         outStr="Before Schedule utc: "+str(h1)
         print(outStr)
-        f.write(outStr)
+        f.write(outStr+'\n')
         # h1=utc2local(h1)
         # print("Before Schedule local: "+str(h1))
         # sched.add_job(my_job,'date',run_date=h1,id='job'+str(count))
