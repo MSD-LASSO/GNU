@@ -35,8 +35,8 @@ def utc2local(utc):
     return utc + offset
 
 if __name__=='__main__':
-    sched = BlockingScheduler()
-    # sched = BackgroundScheduler()
+    # sched = BlockingScheduler()
+    sched = BackgroundScheduler()
 
     Date=[]
     Doppler=[]
