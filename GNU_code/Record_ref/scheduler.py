@@ -25,7 +25,7 @@ def my_job(Doppler):
     # print(str(String))
     # os.system(String)
     print(datetime.now())
-    f.write(datetime.now()+'\n')
+    f.write(str(datetime.now())+'\n')
     f.close()
 
 #https://stackoverflow.com/questions/4770297/convert-utc-datetime-string-to-local-datetime
