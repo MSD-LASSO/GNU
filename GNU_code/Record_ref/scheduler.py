@@ -8,7 +8,7 @@ import os
 
 def my_job(Doppler):
     f = open("/home/pi/Documents/OutputTimes.txt", "a")
-    print(f)
+    # print(f)
     # print(text)
     # global sched, count
     # print(datetime.now())
@@ -24,7 +24,7 @@ def my_job(Doppler):
     # String=datetime.now()
     # print(str(String))
     # os.system(String)
-    print(datetime.now())
+    # print(datetime.now())
     f.write(str(datetime.now())+'\n')
     f.close()
 
