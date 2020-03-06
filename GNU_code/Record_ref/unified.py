@@ -124,6 +124,7 @@ while (i<len(Date)):
                                 samp_rate=sampleRate)
             tb.start()
             tb.wait()
+            tb.end()
             String='python /home/pi/GIT_GNU/GNU/GNU_code/Record_ref/record_ref.py --channel-freq='+str(int(round(Doppler[i]*1e6)))+' --samp-rate='+str(sampleRate)+' --center-freq=437000000 --num-samples='+str(int(round(Length[i]*sampleRate)))+' --file-loc="/home/pi/Documents/Sat_Time'+str(currentTime).replace(" ","_").replace(":","_").replace(".","_")+'"'
 
         else:
@@ -132,6 +133,7 @@ while (i<len(Date)):
                                 samp_rate=sampleRate)
             tb.start()
             tb.wait()
+            tb.end()
             String = 'python /home/pi/GIT_GNU/GNU/GNU_code/Record_ref/record_ref.py --channel-freq=' + '97900000' + ' --samp-rate='+str(sampleRate)+' --center-freq=97000000 --num-samples='+str(int(round(Length[i]*sampleRate)))+' --file-loc="/home/pi/Documents/Ref_Time' + str(
                 currentTime).replace(" ", "_").replace(":", "_").replace(".", "_") + '"'
 
