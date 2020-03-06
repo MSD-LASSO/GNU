@@ -21,7 +21,7 @@ import time
 
 class record_ref(gr.top_block):
 
-    def __init__(self, center_freq=97000000, channel_freq=97900000, file_loc='', num_samples=10000000, samp_rate=2000000):
+    def __init__(self, center_freq=97000000, channel_freq=97900000, file_loc="/dev/null", num_samples=10000000, samp_rate=2000000):
         gr.top_block.__init__(self, "Record Ref")
 
         ##################################################
@@ -115,8 +115,8 @@ def argument_parser():
         "", "--channel-freq", dest="channel_freq", type="intx", default=97900000,
         help="Set channel_freq [default=%default]")
     parser.add_option(
-        "", "--file-loc", dest="file_loc", type="string", default='',
-        help="Set file_loc [default=%default]")
+        "", "--file-loc", dest="file_loc", type="string", default="/dev/null",
+        help="Set /dev/null [default=%default]")
     parser.add_option(
         "", "--num-samples", dest="num_samples", type="intx", default=10000000,
         help="Set num_samples [default=%default]")
@@ -132,6 +132,11 @@ def main(top_block_cls=record_ref, options=None):
 
     tb = top_block_cls(center_freq=options.center_freq, channel_freq=options.channel_freq, file_loc=options.file_loc, num_samples=options.num_samples, samp_rate=options.samp_rate)
     tb.start()
+    try:
+        raw_input('Press Enter to quit: ')
+    except EOFError:
+        pass
+    tb.stop()
     tb.wait()
 
 
