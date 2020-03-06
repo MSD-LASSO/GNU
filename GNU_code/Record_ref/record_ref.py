@@ -43,10 +43,10 @@ class record_ref(gr.top_block):
         self.osmosdr_source_0.set_sample_rate(samp_rate)
         self.osmosdr_source_0.set_center_freq(center_freq, 0)
         self.osmosdr_source_0.set_freq_corr(0, 0)
-        self.osmosdr_source_0.set_dc_offset_mode(0, 0)
-        self.osmosdr_source_0.set_iq_balance_mode(0, 0)
+        self.osmosdr_source_0.set_dc_offset_mode(2, 0)
+        self.osmosdr_source_0.set_iq_balance_mode(2, 0)
         self.osmosdr_source_0.set_gain_mode(False, 0)
-        self.osmosdr_source_0.set_gain(0, 0)
+        self.osmosdr_source_0.set_gain(20, 0)
         self.osmosdr_source_0.set_if_gain(20, 0)
         self.osmosdr_source_0.set_bb_gain(20, 0)
         self.osmosdr_source_0.set_antenna('', 0)
@@ -54,7 +54,7 @@ class record_ref(gr.top_block):
 
         self.blocks_multiply_xx_0 = blocks.multiply_vcc(1)
         self.blocks_head_0 = blocks.head(gr.sizeof_gr_complex*1, num_samples)
-        self.blocks_file_meta_sink_0 = blocks.file_meta_sink(gr.sizeof_gr_complex*1, file_loc+"_META_END_"+str(datetime.datetime.now()).replace(" ","_").replace(":","_").replace(".","_"), samp_rate, 1, blocks.GR_FILE_FLOAT, True, 1000000, "", True)
+        self.blocks_file_meta_sink_0 = blocks.file_meta_sink(gr.sizeof_gr_complex*1, file_loc+"_END_"+str(datetime.datetime.now()).replace(" ","_").replace(":","_").replace(".","_"), samp_rate, 1, blocks.GR_FILE_FLOAT, True, 1000000, "", True)
         self.blocks_file_meta_sink_0.set_unbuffered(False)
         self.analog_sig_source_x_0 = analog.sig_source_c(samp_rate, analog.GR_COS_WAVE, center_freq - channel_freq, 1, 0)
 
@@ -88,7 +88,7 @@ class record_ref(gr.top_block):
 
     def set_file_loc(self, file_loc):
         self.file_loc = file_loc
-        self.blocks_file_meta_sink_0.open(self.file_loc+"_META_END_"+str(datetime.datetime.now()).replace(" ","_").replace(":","_").replace(".","_"))
+        self.blocks_file_meta_sink_0.open(self.file_loc+"_END_"+str(datetime.datetime.now()).replace(" ","_").replace(":","_").replace(".","_"))
 
     def get_num_samples(self):
         return self.num_samples
@@ -129,6 +129,8 @@ def argument_parser():
 def main(top_block_cls=record_ref, options=None):
     if options is None:
         options, _ = argument_parser().parse_args()
+    if gr.enable_realtime_scheduling() != gr.RT_OK:
+        print "Error: failed to enable real-time scheduling."
 
     tb = top_block_cls(center_freq=options.center_freq, channel_freq=options.channel_freq, file_loc=options.file_loc, num_samples=options.num_samples, samp_rate=options.samp_rate)
     tb.start()
