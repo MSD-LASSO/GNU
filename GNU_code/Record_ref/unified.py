@@ -83,8 +83,8 @@ sampleRate=2000000
 #IMPORTANT: Cannot have extra white space at end of InputTimes.txt. It will throw "index out of range" error
 fileName='InputTimes.txt'
 import csv
-# with open('/home/pi/GIT_GNU/GNU/GNU_code/Record_ref/Dummy.txt') as f:
-with open('/home/pi/GPS/Unification_Attempt/'+fileName) as f:
+with open('/home/pi/GIT_GNU/GNU/GNU_code/Record_ref/'+fileName) as f:
+# with open('/home/pi/GPS/Unification_Attempt/'+fileName) as f:
     reader=csv.reader(f,delimiter='\n')
     for row in reader:
         Str=str.split(row[0],",")
