@@ -129,8 +129,6 @@ def argument_parser():
 def main(top_block_cls=record_ref, options=None):
     if options is None:
         options, _ = argument_parser().parse_args()
-    if gr.enable_realtime_scheduling() != gr.RT_OK:
-        print "Error: failed to enable real-time scheduling."
 
     tb = top_block_cls(center_freq=options.center_freq, channel_freq=options.channel_freq, file_loc=options.file_loc, num_samples=options.num_samples, samp_rate=options.samp_rate)
     tb.start()
