@@ -133,6 +133,7 @@ def main(top_block_cls=record_ref, options=None):
     tb = top_block_cls(center_freq=options.center_freq, channel_freq=options.channel_freq, file_loc=options.file_loc, num_samples=options.num_samples, samp_rate=options.samp_rate)
     tb.start()
     tb.wait()
+    time.sleep(10)
 
 
 if __name__ == '__main__':
