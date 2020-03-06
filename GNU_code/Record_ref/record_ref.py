@@ -136,8 +136,9 @@ def main(top_block_cls=record_ref, options=None):
     #     raw_input('Press Enter to quit: ')
     # except EOFError:
     #     pass
-    tb.stop()
     tb.wait()
+    tb.stop()
+
 
 
 if __name__ == '__main__':
