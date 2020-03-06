@@ -35,12 +35,12 @@ def getCurrentTime(GPShandler,debuggerFile):
     debuggerFile.write("Using GPS: "+ str(GPS)+' Time: '+ str(currentTime) + '\n')
     print("Using GPS: "+ str(GPS)+' Time: '+ str(currentTime) + '\n')
     # os.system("sudo echo Using GPS "+ str(GPS)+' Time '+ str(currentTime) + " >> /home/pi/Documents/debugger.txt 2>&1")
-    return currentTime,GPS
+    return currentTime,GPS,GPShandler
 
 
 debuggerFile = open("/home/pi/Documents/schedulerDebugger"+str(datetime.now())+".txt", "w+")
-debuggerFile.write("Scheduler Starting Up. Time:"+str(datetime.now())+'\n')
-print("Scheduler Starting Up. Time:"+str(datetime.now())+'\n')
+debuggerFile.write("Scheduler Starting Up. Time: "+str(datetime.now())+'\n')
+print("Scheduler Starting Up. Time: "+str(datetime.now())+'\n')
 # os.system("sudo echo IRan! >> /home/pi/Documents/debugger.txt 2>&1")
 # try:
 x = L76X.L76X()
@@ -60,8 +60,8 @@ x.L76X_Send_Command(x.SET_POS_FIX_100MS);
 # Set output message
 x.L76X_Send_Command(x.SET_NMEA_OUTPUT);
 
-debuggerFile.write("Completed GPS Setup. Time:"+str(datetime.now())+'\n')
-print("Completed GPS Setup. Time:"+str(datetime.now())+'\n')
+debuggerFile.write("Completed GPS Setup. Time: "+str(datetime.now())+'\n')
+print("Completed GPS Setup. Time: "+str(datetime.now())+'\n')
 
 
 # x.L76X_Exit_BackupMode();
@@ -98,7 +98,7 @@ with open('/home/pi/GPS/Unification_Attempt/'+fileName) as f:
         # os.system("sudo echo "+"Before Schedule utc: " + str(h1)+" >> /home/pi/Documents/debugger.txt 2>&1")
 
 i=0
-currentTime,GPS=getCurrentTime(x)
+currentTime,GPS,x=getCurrentTime(x,debuggerFile)
 while i<len(Date):
     if currentTime>=Date[i]:
         i=i+1
@@ -109,7 +109,7 @@ while i<len(Date):
 
 while (i<len(Date)):
 
-    currentTime, GPS = getCurrentTime(x)
+    currentTime, GPS,x = getCurrentTime(x,debuggerFile)
     # Compare current time and the set times.
     if currentTime>=Date[i]:
         # print('Scheduled Time: '+str(Date[i]))
@@ -134,8 +134,8 @@ while (i<len(Date)):
         # print(Doppler)
         # print(String)
         # os.system("sudo echo "+String+" >> /home/pi/Documents/debugger.txt 2>&1")
-        debuggerFile.write("Completed hackRF call. Time:" + str(datetime.now()) + '\n')
-        print("Completed hackRF call. Time:" + str(datetime.now()) + '\n')
+        debuggerFile.write("Completed hackRF call. Time: " + str(datetime.now()) + '\n')
+        print("Completed hackRF call. Time: " + str(datetime.now()) + '\n')
 
         # os.system(String)
         ######################### End Function Call #########################
@@ -155,8 +155,8 @@ while (i<len(Date)):
         continue
 
 # os.system("sudo echo All Scheduled Times Completed >> /home/pi/Documents/debugger.txt 2>&1")
-debuggerFile.write("All scheduled Times Completed. Time:" + str(datetime.now()) + '\n')
-print("All scheduled Times Completed. Time:" + str(datetime.now()))
+debuggerFile.write("All scheduled Times Completed. Time: " + str(datetime.now()) + '\n')
+print("All scheduled Times Completed. Time: " + str(datetime.now()))
 
 
 
