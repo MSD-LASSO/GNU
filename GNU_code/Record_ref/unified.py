@@ -11,7 +11,7 @@ def getCurrentTime(GPShandler,debuggerFile):
         status=0
     except:
         debuggerFile.write("Failed To Get GPS. Time:" + str(datetime.now()) + '\n')
-        print("Failed To Get GPS. Time:" + str(datetime.now()) + '\n')
+        print("Failed To Get GPS. Time:" + str(datetime.now()))
         # os.system("sudo echo Failed To Get GPS >> /home/pi/Documents/debugger.txt 2>&1")
         status=1
     # print('\n')
@@ -33,14 +33,14 @@ def getCurrentTime(GPShandler,debuggerFile):
         currentTime=datetime.now()
 
     debuggerFile.write("Using GPS: "+ str(GPS)+' Time: '+ str(currentTime) + '\n')
-    print("Using GPS: "+ str(GPS)+' Time: '+ str(currentTime) + '\n')
+    print("Using GPS: "+ str(GPS)+' Time: '+ str(currentTime))
     # os.system("sudo echo Using GPS "+ str(GPS)+' Time '+ str(currentTime) + " >> /home/pi/Documents/debugger.txt 2>&1")
     return currentTime,GPS,GPShandler
 
 
-debuggerFile = open("/home/pi/Documents/schedulerDebugger"+str(datetime.now())+".txt", "w+")
+debuggerFile = open('/home/pi/Documents/schedulerDebugger'+str(datetime.now())+'.txt', "w+")
 debuggerFile.write("Scheduler Starting Up. Time: "+str(datetime.now())+'\n')
-print("Scheduler Starting Up. Time: "+str(datetime.now())+'\n')
+print("Scheduler Starting Up. Time: "+str(datetime.now()))
 # os.system("sudo echo IRan! >> /home/pi/Documents/debugger.txt 2>&1")
 # try:
 x = L76X.L76X()
@@ -61,7 +61,7 @@ x.L76X_Send_Command(x.SET_POS_FIX_100MS);
 x.L76X_Send_Command(x.SET_NMEA_OUTPUT);
 
 debuggerFile.write("Completed GPS Setup. Time: "+str(datetime.now())+'\n')
-print("Completed GPS Setup. Time: "+str(datetime.now())+'\n')
+print("Completed GPS Setup. Time: "+str(datetime.now()))
 
 
 # x.L76X_Exit_BackupMode();
@@ -120,12 +120,12 @@ while (i<len(Date)):
         ######################### Start Function Call #########################
         if Doppler[i] > 0:
             # String='python /home/pi/GIT_GNU/GNU/GNU_code/Record_ref/record_ref.py --channel-freq='+str(int(round(Doppler[i]*1e6)))+' --samp-rate='+str(sampleRate)+' --center-freq=437000000 --num-samples='+str(int(round(Length[i]*sampleRate)))+' --file-loc="/home/pi/Documents/Sat_Time'+str(currentTime).replace(" ","_").replace(":","_").replace(".","_")+'"'
-            record_ref.__init__(center_freq=437000000, channel_freq=int(round(Doppler[i]*1e6)), file_loc='/home/pi/Documents/Sat_Time'+str(currentTime).replace(" ","_").replace(":","_").replace(".","_"), num_samples=int(round(Length[i]*sampleRate)),
+            record_ref.record_ref.__init__(center_freq=437000000, channel_freq=int(round(Doppler[i]*1e6)), file_loc='/home/pi/Documents/Sat_Time'+str(currentTime).replace(" ","_").replace(":","_").replace(".","_"), num_samples=int(round(Length[i]*sampleRate)),
                                 samp_rate=sampleRate)
         else:
             # String = 'python /home/pi/GIT_GNU/GNU/GNU_code/Record_ref/record_ref.py --channel-freq=' + '97900000' + ' --samp-rate='+str(sampleRate)+' --center-freq=97000000 --num-samples='+str(int(round(Length[i]*sampleRate)))+' --file-loc="/home/pi/Documents/Ref_Time' + str(
             #     currentTime).replace(" ", "_").replace(":", "_").replace(".", "_") + '"'
-            record_ref.__init__(center_freq=97000000, channel_freq=97900000, file_loc='/home/pi/Documents/Ref_Time'+str(currentTime).replace(" ","_").replace(":","_").replace(".","_"), num_samples=int(round(Length[i]*sampleRate)),
+            record_ref.record_ref.__init__(center_freq=97000000, channel_freq=97900000, file_loc='/home/pi/Documents/Ref_Time'+str(currentTime).replace(" ","_").replace(":","_").replace(".","_"), num_samples=int(round(Length[i]*sampleRate)),
                                 samp_rate=sampleRate)
 
         # time.sleep(10)
@@ -135,7 +135,7 @@ while (i<len(Date)):
         # print(String)
         # os.system("sudo echo "+String+" >> /home/pi/Documents/debugger.txt 2>&1")
         debuggerFile.write("Completed hackRF call. Time: " + str(datetime.now()) + '\n')
-        print("Completed hackRF call. Time: " + str(datetime.now()) + '\n')
+        print("Completed hackRF call. Time: " + str(datetime.now()))
 
         # os.system(String)
         ######################### End Function Call #########################
