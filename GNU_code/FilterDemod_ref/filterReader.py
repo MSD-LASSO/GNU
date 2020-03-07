@@ -16,13 +16,14 @@ def main(top=filterDemod_ref, options=None):
             files.extend(filenames)
             break
 
+        print(filenames)
         j=0
         while(j<len(files)):
             inputFile=files[j]
             if ~inputFile.__contains__("hdr"):
 
                 outputName = directoryToFiles+'/pi'+str(i+1)+'_filtered/'+inputFile+".wav"
-
+                print(outputName)
                 tb = top(cutoff_freq=cutoff_freq, samp_rate=sampleRate, save_file=outputName,
                          source_file=inputFile, trans_width=2000)
                 tb.start()
