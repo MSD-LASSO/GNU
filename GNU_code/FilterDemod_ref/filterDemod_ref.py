@@ -19,7 +19,7 @@ import pmt
 
 class filterDemod_ref(gr.top_block):
 
-    def __init__(self, cutoff_freq=80000, decimation=1, gain=2, num_samples=10000000, samp_rate=2000000, save_file='', source_file='', trans_width=2000):
+    def __init__(self, cutoff_freq=80000, decimation=1, gain=1, samp_rate=2000000, save_file='', source_file='', trans_width=2000):
         gr.top_block.__init__(self, "Filterdemod Ref")
 
         ##################################################
@@ -28,7 +28,6 @@ class filterDemod_ref(gr.top_block):
         self.cutoff_freq = cutoff_freq
         self.decimation = decimation
         self.gain = gain
-        self.num_samples = num_samples
         self.samp_rate = samp_rate
         self.save_file = save_file
         self.source_file = source_file
@@ -41,7 +40,6 @@ class filterDemod_ref(gr.top_block):
         	gain, samp_rate, cutoff_freq, trans_width, firdes.WIN_HAMMING, 6.76))
         self.blocks_wavfile_sink_0 = blocks.wavfile_sink(save_file, 1, samp_rate, 8)
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_gr_complex*1, samp_rate,True)
-        self.blocks_head_0_0 = blocks.head(gr.sizeof_float*1, num_samples)
         self.blocks_file_source_0 = blocks.file_source(gr.sizeof_gr_complex*1, source_file, False)
         self.blocks_file_source_0.set_begin_tag(pmt.PMT_NIL)
         self.analog_wfm_rcv_0 = analog.wfm_rcv(
@@ -54,9 +52,8 @@ class filterDemod_ref(gr.top_block):
         ##################################################
         # Connections
         ##################################################
-        self.connect((self.analog_wfm_rcv_0, 0), (self.blocks_head_0_0, 0))
+        self.connect((self.analog_wfm_rcv_0, 0), (self.blocks_wavfile_sink_0, 0))
         self.connect((self.blocks_file_source_0, 0), (self.blocks_throttle_0, 0))
-        self.connect((self.blocks_head_0_0, 0), (self.blocks_wavfile_sink_0, 0))
         self.connect((self.blocks_throttle_0, 0), (self.low_pass_filter_0_1, 0))
         self.connect((self.low_pass_filter_0_1, 0), (self.analog_wfm_rcv_0, 0))
 
@@ -79,13 +76,6 @@ class filterDemod_ref(gr.top_block):
     def set_gain(self, gain):
         self.gain = gain
         self.low_pass_filter_0_1.set_taps(firdes.low_pass(self.gain, self.samp_rate, self.cutoff_freq, self.trans_width, firdes.WIN_HAMMING, 6.76))
-
-    def get_num_samples(self):
-        return self.num_samples
-
-    def set_num_samples(self, num_samples):
-        self.num_samples = num_samples
-        self.blocks_head_0_0.set_length(self.num_samples)
 
     def get_samp_rate(self):
         return self.samp_rate
@@ -126,11 +116,8 @@ def argument_parser():
         "", "--decimation", dest="decimation", type="intx", default=1,
         help="Set decimation [default=%default]")
     parser.add_option(
-        "", "--gain", dest="gain", type="intx", default=2,
+        "", "--gain", dest="gain", type="intx", default=1,
         help="Set gain [default=%default]")
-    parser.add_option(
-        "", "--num-samples", dest="num_samples", type="intx", default=10000000,
-        help="Set num_samples [default=%default]")
     parser.add_option(
         "", "--samp-rate", dest="samp_rate", type="intx", default=2000000,
         help="Set samp_rate [default=%default]")
@@ -150,7 +137,7 @@ def main(top_block_cls=filterDemod_ref, options=None):
     if options is None:
         options, _ = argument_parser().parse_args()
 
-    tb = top_block_cls(cutoff_freq=options.cutoff_freq, decimation=options.decimation, gain=options.gain, num_samples=options.num_samples, samp_rate=options.samp_rate, save_file=options.save_file, source_file=options.source_file, trans_width=options.trans_width)
+    tb = top_block_cls(cutoff_freq=options.cutoff_freq, decimation=options.decimation, gain=options.gain, samp_rate=options.samp_rate, save_file=options.save_file, source_file=options.source_file, trans_width=options.trans_width)
     tb.start()
     tb.wait()
 
