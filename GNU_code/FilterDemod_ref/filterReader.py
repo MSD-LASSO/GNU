@@ -3,7 +3,7 @@ from os import walk
 from os import mkdir
 
 def main(top=filterDemod_ref, options=None):
-    directoryToFiles = "C:/Users/awian/Desktop/MSD/3_6_test/"
+    directoryToFiles = "../../../../3_6_refSatref_test2"
 
     sampleRate = 20000000
     cutoff_freq = 80000
