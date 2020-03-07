@@ -32,7 +32,7 @@ def main(top=filterDemod_ref, options=None):
                 # tb.start()
                 # tb.wait()
                 # del tb
-                String='python filterDemod_ref.py --save-file='+outputName+' --source-file='+inputPath+' --cutoff-freq='+str(cutoff_freq)+' --samp-rate='+str(sampleRate)+'trans_width=2000'
+                String='python filterDemod_ref.py --save-file='+outputName+' --source-file='+inputPath+' --cutoff-freq='+str(cutoff_freq)+' --samp-rate='+str(sampleRate)+' --trans_width=2000'
                 print(String)
                 os.system(String)
             j+=1
