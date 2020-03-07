@@ -139,10 +139,6 @@
   <block>
     <key>blocks_file_source</key>
     <param>
-      <key>begin_tag</key>
-      <value>pmt.PMT_NIL</value>
-    </param>
-    <param>
       <key>alias</key>
       <value></value>
     </param>
