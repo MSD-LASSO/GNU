@@ -16,7 +16,7 @@ def main(top=filterDemod_ref, options=None):
             files.extend(filenames)
             break
 
-        print(filenames)
+        print(files)
         j=0
         while(j<len(files)):
             inputFile=files[j]
