@@ -134,6 +134,8 @@ def main(top_block_cls=record_ref, options=None):
     tb.start()
     tb.wait()
 
+    time.sleep(10)
+
 
 if __name__ == '__main__':
     main()
