@@ -10,12 +10,14 @@ sample_delay = zeros(max-2,1);
 offset = zeros(max-7,1);
 delta_scheduler = zeros(max-2,1);
 delta_file = zeros(max-2,1);
+file_save_time_1 = zeros(max-7, 1);
+file_save_time_2 = zeros(max-7, 1);
 for i = 3:7
     pi_1_file = [mainPath '\pi1_filtered\' pi1_directory(i).name];
     pi_2_file = [mainPath '\pi2_filtered\' pi2_directory(i).name];
-    file_save_time_1 = str2double(replace(extractBetween(pi1_directory(i).name, 57, 65), '_', '.'));
-    file_save_time_2 = str2double(replace(extractBetween(pi2_directory(i).name, 57, 65), '_', '.'));
-    delta_file(i-2) = file_save_time_1 - file_save_time_2;
+    file_save_time_1(i-2) = 60*str2double(replace(extractBetween(pi1_directory(i).name, 54, 55), '_', '.')) + str2double(replace(extractBetween(pi1_directory(i).name, 57, 65), '_', '.'));
+    file_save_time_2(i-2) = 60*str2double(replace(extractBetween(pi2_directory(i).name, 54, 55), '_', '.')) + str2double(replace(extractBetween(pi2_directory(i).name, 57, 65), '_', '.'));
+    delta_file(i-2) = file_save_time_1(i-2) - file_save_time_2(i-2);
     [x1, Fs1, N1] = readIQ(pi_1_file);
     [x2, Fs2, N2] = readIQ(pi_2_file);
     [sample_delay(i-2), ~, ~, ~, ~] = abs_xcov_IQ(pi_1_file, pi_2_file, 0);
@@ -36,11 +38,14 @@ end
 
 
 
-plot(offset)
+plot((file_save_time_1+file_save_time_2)/2 - (file_save_time_1(1)+file_save_time_2(1))/2, offset)
+title('Time offsets Bewteen the Pis --- Pi2 time - Pi1 time')
+ylabel('Offset Time [s]')
+xlabel('Test Time [s]')
+offset
 
 
-
-
+save('3_6_refSATref_test2.mat');
 
 
 % input_delay = -27;
