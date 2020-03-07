@@ -38,7 +38,7 @@
     </param>
     <param>
       <key>generate_options</key>
-      <value>qt_gui</value>
+      <value>no_gui</value>
     </param>
     <param>
       <key>hier_block_src_path</key>
@@ -109,11 +109,11 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>0</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(760, 84)</value>
+      <value>(792, 140)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -133,7 +133,7 @@
     </param>
     <param>
       <key>quad_rate</key>
-      <value>2e6</value>
+      <value>samp_rate</value>
     </param>
   </block>
   <block>
@@ -156,11 +156,11 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1064, 652)</value>
+      <value>(800, 516)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -203,11 +203,11 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1104, 788)</value>
+      <value>(840, 652)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -258,7 +258,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(224, 68)</value>
+      <value>(208, 36)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -317,11 +317,11 @@
     </param>
     <param>
       <key>file</key>
-      <value>C:\Users\devri\Documents\RIT\Sixth Semester\MSD I\GIT\GNU_non_git\2_28_GPS_SECOND_pi1\Time2020-02-28_19_27_05_113044_END_2020-02-28_19_27_05_935741</value>
+      <value>source_file</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(216, 204)</value>
+      <value>(256, 132)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -345,7 +345,7 @@
     </param>
     <param>
       <key>repeat</key>
-      <value>True</value>
+      <value>False</value>
     </param>
     <param>
       <key>vlen</key>
@@ -368,11 +368,11 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>0</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(936, 92)</value>
+      <value>(992, 148)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -423,11 +423,11 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1096, 724)</value>
+      <value>(832, 588)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -474,7 +474,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(432, 92)</value>
+      <value>(432, 148)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -529,15 +529,15 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>0</value>
+      <value>1</value>
     </param>
     <param>
       <key>file</key>
-      <value>C:\Users\devri\Documents\RIT\Sixth Semester\MSD I\GIT\GNU_non_git\SECOND_2_28_GPS_filtered\pi2_test10.wav</value>
+      <value>save_file</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1104, 76)</value>
+      <value>(1032, 228)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -725,7 +725,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>type</key>
@@ -733,7 +733,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(848, 548)</value>
+      <value>(584, 412)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -800,7 +800,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>2</value>
+      <value>1</value>
     </param>
     <param>
       <key>type</key>
@@ -808,7 +808,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(584, 44)</value>
+      <value>(608, 100)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -816,7 +816,7 @@
     </param>
     <param>
       <key>gain</key>
-      <value>1</value>
+      <value>gain</value>
     </param>
     <param>
       <key>id</key>
@@ -914,7 +914,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>fbw</key>
@@ -922,7 +922,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1072, 532)</value>
+      <value>(808, 396)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1192,12 +1192,6 @@
   <connection>
     <source_block_id>low_pass_filter_0_1</source_block_id>
     <sink_block_id>analog_wfm_rcv_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>low_pass_filter_0_1</source_block_id>
-    <sink_block_id>low_pass_filter_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
