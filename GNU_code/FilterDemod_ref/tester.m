@@ -1,21 +1,33 @@
 %tester
 clearvars
 close all
-pi_1_file_1 = 'pi1_test5.wav';
-pi_2_file_1 = 'pi2_test5.wav';
-[x1, Fs1, N1] = readIQ(pi_1_file_1);
-[x2, Fs2, N2] = readIQ(pi_2_file_1);
+mainPath='C:\Users\devri\Documents\RIT\Sixth Semester\MSD I\GIT\GNU_non_git\3_6_refSATref_test2';
+pi1_directory=dir([mainPath '\pi1_filtered']);
+pi2_directory=dir([mainPath '\pi2_filtered']);
+max = size(pi2_directory, 1);
+time_delay = zeros(max,1);
+sample_delay = zeros(max,1);
+for i = 4:max
+    pi_1_file = [mainPath '\pi1_filtered\' pi1_directory(i).name];
+    pi_2_file = [mainPath '\pi2_filtered\' pi2_directory(i).name];
+    [x1, Fs1, N1] = readIQ(pi_1_file);
+    [x2, Fs2, N2] = readIQ(pi_2_file);
+    [sample_delay(i), ~, ~, ~, ~] = abs_xcov_IQ(pi_1_file, pi_2_file, 0);
+    time_delay(i) = sample_delay(i) /Fs1;
+    t = 0:1/Fs1:(N1-1)/Fs1;
+    figure
+    plot(t, x1+1, t, x2-1)
+    legend('First Pi', 'Second Pi')
+    xlabel('Time [s]')
+    ylabel('Signals with offsets')
+    ylim([-2.5 2.5]);
+end
+
 % plot_fft_IQ(pi_1_file_1);
 % plot_fft_IQ(pi_2_file_1);
-[delay, ~, ~, ~, ~] = abs_xcov_IQ(pi_1_file_1, pi_2_file_1, 0);
-time = delay /Fs1;
-t = 0:1/Fs1:(N1-1)/Fs1;
-figure
-plot(t, x1+1, t, x2-1)
-legend('First Pi', 'Second Pi')
-xlabel('Time [s]')
-ylabel('Signals with offsets')
-ylim([-2.5 2.5]);
+
+
+
 
 
 
