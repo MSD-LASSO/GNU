@@ -129,13 +129,24 @@ while (i<len(Date)):
             String='python /home/pi/GIT_GNU/GNU/GNU_code/Record_ref/record_ref.py --channel-freq='+str(int(round(Doppler[i]*1e6)))+' --samp-rate='+str(sampleRate)+' --center-freq=437000000 --num-samples='+str(int(round(Length[i]*sampleRate)))+' --file-loc="/home/pi/Documents/Sat_Time'+str(currentTime).replace(" ","_").replace(":","_").replace(".","_")+'"'
 
         else:
+            print("Before Calling GNU Code " + str(datetime.now))
+            debuggerFile.write("Before Calling GNU Code " + str(datetime.now) + '\n')
             top=record_ref
             tb=top.record_ref(center_freq=97000000, channel_freq=97900000, file_loc='/home/pi/Documents/Ref_Time'+str(currentTime).replace(" ","_").replace(":","_").replace(".","_"), num_samples=int(round(Length[i]*sampleRate)),
                                 samp_rate=sampleRate)
+            print("After calling class constructor: " + str(datetime.now))
+            debuggerFile.write("After calling class constructor: " + str(datetime.now) + '\n')
             tb.start()
+            print("After calling tb.start(): " + str(datetime.now))
+            debuggerFile.write("After calling tb.start(): "+ str(datetime.now) + '\n')
             tb.wait()
+            print("After calling tb.wait(): " + str(datetime.now))
+            debuggerFile.write("After calling tb.wait(): " + str(datetime.now) + '\n')
             # tb.stop()
             del tb
+            print("After calling deleting tb: " + str(h1))
+            debuggerFile.write("After calling deleting tb: " + str(h1) + '\n')
+
             String = 'python /home/pi/GIT_GNU/GNU/GNU_code/Record_ref/record_ref.py --channel-freq=' + '97900000' + ' --samp-rate='+str(sampleRate)+' --center-freq=97000000 --num-samples='+str(int(round(Length[i]*sampleRate)))+' --file-loc="/home/pi/Documents/Ref_Time' + str(
                 currentTime).replace(" ", "_").replace(":", "_").replace(".", "_") + '"'
 
