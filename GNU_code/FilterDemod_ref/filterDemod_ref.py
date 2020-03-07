@@ -14,7 +14,7 @@ from gnuradio import gr
 from gnuradio.eng_option import eng_option
 from gnuradio.filter import firdes
 from optparse import OptionParser
-import pmt
+#import pmt
 
 
 class filterDemod_ref(gr.top_block):
@@ -41,7 +41,7 @@ class filterDemod_ref(gr.top_block):
         self.blocks_wavfile_sink_0 = blocks.wavfile_sink(save_file, 1, samp_rate, 8)
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_gr_complex*1, samp_rate,True)
         self.blocks_file_source_0 = blocks.file_source(gr.sizeof_gr_complex*1, source_file, False)
-        self.blocks_file_source_0.set_begin_tag(pmt.PMT_NIL)
+        #self.blocks_file_source_0.set_begin_tag(pmt.PMT_NIL)
         self.analog_wfm_rcv_0 = analog.wfm_rcv(
         	quad_rate=samp_rate,
         	audio_decimation=1,
