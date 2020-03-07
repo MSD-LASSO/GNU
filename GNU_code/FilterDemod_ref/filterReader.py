@@ -6,7 +6,7 @@ import os
 def main(top=filterDemod_ref, options=None):
     directoryToFiles = "../../../../3_6_refSatref_test2/"
 
-    sampleRate = 20000000
+    sampleRate = 2000000
     cutoff_freq = 80000
 
     for i in range(2):
