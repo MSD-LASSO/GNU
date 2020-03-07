@@ -5,15 +5,22 @@ mainPath='C:\Users\devri\Documents\RIT\Sixth Semester\MSD I\GIT\GNU_non_git\3_6_
 pi1_directory=dir([mainPath '\pi1_filtered']);
 pi2_directory=dir([mainPath '\pi2_filtered']);
 max = size(pi2_directory, 1);
-time_delay = zeros(max,1);
-sample_delay = zeros(max,1);
-for i = 4:max
+time_delay = zeros(max-2,1);
+sample_delay = zeros(max-2,1);
+offset = zeros(max-7,1);
+delta_scheduler = zeros(max-2,1);
+delta_file = zeros(max-2,1);
+for i = 3:7
     pi_1_file = [mainPath '\pi1_filtered\' pi1_directory(i).name];
     pi_2_file = [mainPath '\pi2_filtered\' pi2_directory(i).name];
+    file_save_time_1 = str2double(replace(extractBetween(pi1_directory(i).name, 57, 65), '_', '.'));
+    file_save_time_2 = str2double(replace(extractBetween(pi2_directory(i).name, 57, 65), '_', '.'));
+    delta_file(i-2) = file_save_time_1 - file_save_time_2;
     [x1, Fs1, N1] = readIQ(pi_1_file);
     [x2, Fs2, N2] = readIQ(pi_2_file);
-    [sample_delay(i), ~, ~, ~, ~] = abs_xcov_IQ(pi_1_file, pi_2_file, 0);
-    time_delay(i) = sample_delay(i) /Fs1;
+    [sample_delay(i-2), ~, ~, ~, ~] = abs_xcov_IQ(pi_1_file, pi_2_file, 0);
+    time_delay(i-2) = sample_delay(i-2) /Fs1;
+    offset(i-2) = -1 * time_delay(i-2) -  delta_file(i-2);
     t = 0:1/Fs1:(N1-1)/Fs1;
     figure
     plot(t, x1+1, t, x2-1)
@@ -29,7 +36,7 @@ end
 
 
 
-
+plot(offset)
 
 
 

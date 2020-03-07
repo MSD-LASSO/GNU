@@ -312,7 +312,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>20e6</value>
+      <value>2e6</value>
     </param>
   </block>
   <block>
@@ -335,7 +335,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>freq</key>
@@ -488,7 +488,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -531,7 +531,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -578,7 +578,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>file</key>
@@ -586,7 +586,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(550, 91)</value>
+      <value>(392, 276)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -629,11 +629,11 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>0</value>
+      <value>1</value>
     </param>
     <param>
       <key>file</key>
-      <value>/home/pentoo/Documents/Tutorial/RefSig_test</value>
+      <value>C:\Users\devri\Documents\RIT\Sixth Semester\MSD I\GIT\GNU_non_git\3_6_refSATref_test2\pi1_filtered\Ref_Time2020-03-06_23_23_30_345571_END_2020-03-06_23_23_30_372618</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -684,7 +684,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -786,7 +786,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -837,11 +837,11 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>0</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(406, 51)</value>
+      <value>(424, 52)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -896,7 +896,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>0</value>
     </param>
     <param>
       <key>file</key>
@@ -943,7 +943,7 @@
     </param>
     <param>
       <key>cutoff_freq</key>
-      <value>40e3</value>
+      <value>80e3</value>
     </param>
     <param>
       <key>decim</key>
@@ -991,7 +991,7 @@
     </param>
     <param>
       <key>width</key>
-      <value>20e3</value>
+      <value>2e3</value>
     </param>
     <param>
       <key>win</key>
@@ -2298,7 +2298,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -2433,7 +2433,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1013, 107)</value>
+      <value>(1008, 124)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2492,7 +2492,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>fft_size</key>
@@ -2587,7 +2587,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -2728,7 +2728,7 @@
   </connection>
   <connection>
     <source_block_id>blocks_throttle_0</source_block_id>
-    <sink_block_id>blocks_multiply_xx_0</sink_block_id>
+    <sink_block_id>low_pass_filter_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
