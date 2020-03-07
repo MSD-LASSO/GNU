@@ -12,6 +12,7 @@ def main(top=filterDemod_ref, options=None):
         #Get all file names
         mkdir(directoryToFiles+'/pi'+str(i+1)+'_filtered/')
         files = []
+        print(directoryToFiles+'pi'+str(i+1)+'/')
         for (dirpath, dirnames, filenames) in walk(directoryToFiles+'pi'+str(i+1)+'/'):
             files.extend(filenames)
             break
