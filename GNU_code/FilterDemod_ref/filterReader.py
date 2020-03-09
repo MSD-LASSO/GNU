@@ -4,14 +4,16 @@ from os import mkdir
 import os
 
 def main(top=filterDemod_ref, options=None):
-    directoryToFiles = "../../../../3_6_refSatref_test2/"
+    directoryToFiles = "../../../../3_9_ref_only/"
 
     sampleRate = 2000000
     cutoff_freq = 80000
 
     for i in range(2):
         #Get all file names
-        mkdir(directoryToFiles+'/pi'+str(i+1)+'_filtered/')
+        if os.path.exists(directoryToFiles+'/pi'+str(i+1)+'_filtered/')==0:
+            mkdir(directoryToFiles+'/pi'+str(i+1)+'_filtered/')
+
         files = []
         print(directoryToFiles+'pi'+str(i+1)+'/')
         for (dirpath, dirnames, filenames) in walk(directoryToFiles+'pi'+str(i+1)+'/'):
@@ -22,7 +24,7 @@ def main(top=filterDemod_ref, options=None):
         j=0
         while(j<len(files)):
             inputFile=files[j]
-            if ~inputFile.__contains__("hdr"):
+            if inputFile.__contains__("hdr")==0:
                 inputPath=directoryToFiles+'/pi'+str(i+1)+'/'+inputFile
                 outputName = directoryToFiles+'/pi'+str(i+1)+'_filtered/'+inputFile+".wav"
                 # print(outputName)
