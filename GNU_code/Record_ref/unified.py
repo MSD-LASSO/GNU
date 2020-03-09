@@ -175,7 +175,7 @@ while (i<len(Date)):
 
         #Goal now is to find the data file we just created and rename it.
         queryString=str(currentTime).replace(" ","_").replace(":","_").replace(".","_")
-        for (dirpath, dirnames, filenames) in walk('/home/pi/Documents/'):
+        for (dirpath, dirnames, filenames) in os.walk('/home/pi/Documents/'):
             files.extend(filenames)
             break
 
