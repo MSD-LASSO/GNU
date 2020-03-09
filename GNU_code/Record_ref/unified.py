@@ -3,7 +3,7 @@ import time
 import record_ref
 from datetime import datetime, date
 import math
-# import os
+import os
 
 def getCurrentTime(GPShandler,debuggerFile):
     try:
