@@ -4,16 +4,20 @@ from os import mkdir
 import os
 
 def main(top=filterDemod_ref, options=None):
+    # Directory to find the source files. This must be changed every time.
     directoryToFiles = "../../../../3_9_ref_only/"
 
+    # Change the sample rate from 2million if applicable
     sampleRate = 2000000
+    # cutoff_Freq is how wide the filter is. Narrower for narrower signals?
     cutoff_freq = 80000
 
     for i in range(2):
-        #Get all file names
+        # Make the output directories
         if os.path.exists(directoryToFiles+'/pi'+str(i+1)+'_filtered/')==0:
             mkdir(directoryToFiles+'/pi'+str(i+1)+'_filtered/')
 
+        # Get all file names in the source directories specified by directoryToFiles
         files = []
         print(directoryToFiles+'pi'+str(i+1)+'/')
         for (dirpath, dirnames, filenames) in walk(directoryToFiles+'pi'+str(i+1)+'/'):
@@ -21,10 +25,13 @@ def main(top=filterDemod_ref, options=None):
             break
 
         # print(files)
+        # Iterate through all files in the source directory. If the file is not a header file or a debugger file as
+        # identified by "hdr" and "Debugger", then we filter that file.
+        # We specify the input and outputh paths and run GNUradio filterDemod_ref.py
         j=0
         while(j<len(files)):
             inputFile=files[j]
-            if inputFile.__contains__("hdr")==0:
+            if inputFile.__contains__("hdr")==0 & inputFile.__contains__("Debugger")==0:
                 inputPath=directoryToFiles+'/pi'+str(i+1)+'/'+inputFile
                 outputName = directoryToFiles+'/pi'+str(i+1)+'_filtered/'+inputFile+".wav"
                 # print(outputName)
