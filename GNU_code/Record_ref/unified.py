@@ -201,13 +201,13 @@ while (i<len(Date)):
                 afterFinishingGNUStr="%s_%s_%s" % (afterFinishingGNU.minute, afterFinishingGNU.second, str(afterFinishingGNU.microsecond))
 
                 print("FileName: ")
-                print('/home/pi/Documents/'+
-                          prefix+"Time_Scheduled_"+scheduled+"_atEntry_"+actuallyRanAt+"_afterSetup_"+afterSetupStr+
-                          "_afterStartingGNU"+afterStartingGNUStr+"_afterFinishingGNU"+afterFinishingGNUStr+extension)
+                # print('/home/pi/Documents/'+
+                #           prefix+"Time_Scheduled_"+scheduled+"_atEntry_"+actuallyRanAt+"_afterSetup_"+afterSetupStr+
+                #           "_afterStartingGNU_"+afterStartingGNUStr+"_afterFinishingGNU_"+afterFinishingGNUStr+extension)
 
-                os.rename(r'/home/pi/Documents/'+currentFile+extension, r'/home/pi/Documents/'+
+                os.rename(r'/home/pi/Documents/'+currentFile, r'/home/pi/Documents/'+
                           prefix+"Time_Scheduled_"+scheduled+"_atEntry_"+actuallyRanAt+"_afterSetup_"+afterSetupStr+
-                          "_afterStartingGNU"+afterStartingGNUStr+"_afterFinishingGNU"+afterFinishingGNUStr+extension)
+                          "_afterStartingGNU_"+afterStartingGNUStr+"_afterFinishingGNU_"+afterFinishingGNUStr+extension)
 
 
         # os.system(String)
