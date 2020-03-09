@@ -37,10 +37,10 @@ def getCurrentTime(GPShandler,debuggerFile):
     # os.system("sudo echo Using GPS "+ str(GPS)+' Time '+ str(currentTime) + " >> /home/pi/Documents/debugger.txt 2>&1")
     return currentTime,GPS,GPShandler
 
-
-debuggerFile = open(str('/home/pi/Documents/schedulerDebugger'+str(datetime.now())+'.txt'), "w+")
-debuggerFile.write("Scheduler Starting Up. Time: "+str(datetime.now())+'\n')
-print("Scheduler Starting Up. Time: "+str(datetime.now()))
+startUp=datetime.now()
+debuggerFile = open('/home/pi/Documents/schedulerDebugger'+str(startUp).replace(" ", "_").replace(":", "_").replace(".", "_")+'.txt', "w+")
+debuggerFile.write("Scheduler Starting Up. Time: "+str(startUp)+'\n')
+print("Scheduler Starting Up. Time: "+str(startUp))
 # os.system("sudo echo IRan! >> /home/pi/Documents/debugger.txt 2>&1")
 # try:
 x = L76X.L76X()
@@ -200,7 +200,7 @@ while (i<len(Date)):
                 afterStartingGNUStr="%s_%s" % (afterStartingGNU.second, str(afterStartingGNU.microsecond))
                 afterFinishingGNUStr="%s_%s_%s" % (afterFinishingGNU.minute, afterFinishingGNU.second, str(afterFinishingGNU.microsecond))
 
-                print("FileName: ")
+                # print("FileName: ")
                 # print('/home/pi/Documents/'+
                 #           prefix+"Time_Scheduled_"+scheduled+"_atEntry_"+actuallyRanAt+"_afterSetup_"+afterSetupStr+
                 #           "_afterStartingGNU_"+afterStartingGNUStr+"_afterFinishingGNU_"+afterFinishingGNUStr+extension)
