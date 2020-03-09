@@ -122,30 +122,39 @@ while (i<len(Date)):
             top=record_ref
             tb=top.record_ref(center_freq=437000000, channel_freq=int(round(Doppler[i]*1e6)), file_loc='/home/pi/Documents/Sat_Time'+str(currentTime).replace(" ","_").replace(":","_").replace(".","_"), num_samples=int(round(Length[i]*sampleRate)),
                                 samp_rate=sampleRate)
+            afterSetup=datetime.now()
+            print("After calling class constructor: " + str(afterSetup))
+            debuggerFile.write("After calling class constructor: " + str(afterSetup) + '\n')
             tb.start()
+            afterStartingGNU=datetime.now()
+            print("After calling tb.start(): " + str(afterStartingGNU))
+            debuggerFile.write("After calling tb.start(): "+ str(afterStartingGNU) + '\n')
             tb.wait()
-            # tb.stop()
+            afterFinishingGNU=datetime.now()
+            print("After calling tb.wait(): " + str(afterFinishingGNU))
+            debuggerFile.write("After calling tb.wait(): " + str(afterFinishingGNU) + '\n')
             del tb
             String='python /home/pi/GIT_GNU/GNU/GNU_code/Record_ref/record_ref.py --channel-freq='+str(int(round(Doppler[i]*1e6)))+' --samp-rate='+str(sampleRate)+' --center-freq=437000000 --num-samples='+str(int(round(Length[i]*sampleRate)))+' --file-loc="/home/pi/Documents/Sat_Time'+str(currentTime).replace(" ","_").replace(":","_").replace(".","_")+'"'
-
         else:
-            print("Before Calling GNU Code " + str(datetime.now()))
-            debuggerFile.write("Before Calling GNU Code " + str(datetime.now()) + '\n')
+            # print("Before Calling GNU Code " + str(datetime.now()))
+            # debuggerFile.write("Before Calling GNU Code " + str(datetime.now()) + '\n')
             top=record_ref
             tb=top.record_ref(center_freq=97000000, channel_freq=97900000, file_loc='/home/pi/Documents/Ref_Time'+str(currentTime).replace(" ","_").replace(":","_").replace(".","_"), num_samples=int(round(Length[i]*sampleRate)),
                                 samp_rate=sampleRate)
-            print("After calling class constructor: " + str(datetime.now()))
-            debuggerFile.write("After calling class constructor: " + str(datetime.now()) + '\n')
+            afterSetup=datetime.now()
+            print("After calling class constructor: " + str(afterSetup))
+            debuggerFile.write("After calling class constructor: " + str(afterSetup) + '\n')
             tb.start()
-            print("After calling tb.start(): " + str(datetime.now()))
-            debuggerFile.write("After calling tb.start(): "+ str(datetime.now()) + '\n')
+            afterStartingGNU=datetime.now()
+            print("After calling tb.start(): " + str(afterStartingGNU))
+            debuggerFile.write("After calling tb.start(): "+ str(afterStartingGNU) + '\n')
             tb.wait()
-            print("After calling tb.wait(): " + str(datetime.now()))
-            debuggerFile.write("After calling tb.wait(): " + str(datetime.now()) + '\n')
-            # tb.stop()
+            afterFinishingGNU=datetime.now()
+            print("After calling tb.wait(): " + str(afterFinishingGNU))
+            debuggerFile.write("After calling tb.wait(): " + str(afterFinishingGNU) + '\n')
             del tb
-            print("After calling deleting tb: " + str(datetime.now()))
-            debuggerFile.write("After calling deleting tb: " + str(datetime.now()) + '\n')
+            # print("After calling deleting tb: " + str(datetime.now()))
+            # debuggerFile.write("After calling deleting tb: " + str(datetime.now()) + '\n')
 
             String = 'python /home/pi/GIT_GNU/GNU/GNU_code/Record_ref/record_ref.py --channel-freq=' + '97900000' + ' --samp-rate='+str(sampleRate)+' --center-freq=97000000 --num-samples='+str(int(round(Length[i]*sampleRate)))+' --file-loc="/home/pi/Documents/Ref_Time' + str(
                 currentTime).replace(" ", "_").replace(":", "_").replace(".", "_") + '"'
@@ -162,6 +171,38 @@ while (i<len(Date)):
         print("Completed hackRF call. Time: " + str(datetime.now()))
         print("HackRf String Call: ")
         print(String)
+
+
+        #Goal now is to find the data file we just created and rename it.
+        queryString=str(currentTime).replace(" ","_").replace(":","_").replace(".","_")
+        for (dirpath, dirnames, filenames) in walk('/home/pi/Documents/'):
+            files.extend(filenames)
+            break
+
+        for currentFile in files:
+            if currentFile.__contains__(queryString):
+                # Now we rename the file
+                # Time_Scheduled_2020-MM-DD_HH_mm_SS_ffffff_atEntry_SS_fffffff_afterSetup_SS_ffffff_afterStartingGNU_SS_ffffff_afterFinishingGNU_mm_SS_ffffff
+                if currentFile.__contains__("."):
+                    extension=".hdr"
+                else:
+                    extension=''
+
+                if currentFile.__contains__("Sat"):
+                    prefix="Sat_"
+                else:
+                    prefix="Ref_"
+
+                scheduled=str(Date[i]).replace(" ", "_").replace(":", "_").replace(".", "_")
+                actuallyRanAt="%s_%s" % (currentTime.second, str(currentTime.microsecond))
+                afterSetupStr="%s_%s" % (afterSetup.second, str(afterSetup.microsecond))
+                afterStartingGNUStr="%s_%s" % (afterStartingGNU.second, str(afterStartingGNU.microsecond))
+                afterFinishingGNUStr="%s_%s_%s" % (afterFinishingGNU.minute, afterFinishingGNU.second, str(afterFinishingGNU.microsecond))
+
+                os.rename(r'/home/pi/Documents/'+currentFile+extension, r'/home/pi/Documents/'+
+                          prefix+"Time_Scheduled_"+scheduled+"_atEntry_"+actuallyRanAt+"_afterSetup_"+afterSetupStr+
+                          "_afterStartingGNU"+afterStartingGNUStr+"_afterFinishingGNU"+afterFinishingGNUStr+extension)
+
 
         # os.system(String)
         ######################### End Function Call #########################
