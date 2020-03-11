@@ -67,7 +67,7 @@ end
 
 plot(test_start, offset)
 hold on
-plot(test_start, delta_GNU)
+% plot(test_start, delta_GNU)
 title('Time offsets Bewteen the Pis --- Pi2 time - Pi1 time')
 ylabel('Offset Time [s]')
 xlabel('Test Time [s]')

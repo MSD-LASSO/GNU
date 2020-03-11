@@ -17,7 +17,7 @@ else
     max_lag_f = max_lag;
 end
 Ts = 1 / Fs1;
-[d, lags] = xcov(abs(x1), abs(x2), max_lag_f);
+[d, lags] = xcov(x1, x2, max_lag_f);
 d_norm = abs(d)/max(abs(d));
 % hold off
 % figure
