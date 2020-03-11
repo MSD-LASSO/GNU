@@ -136,25 +136,28 @@ while (i<len(Date)):
             del tb
             String='python /home/pi/GIT_GNU/GNU/GNU_code/Record_ref/record_ref.py --channel-freq='+str(int(round(Doppler[i]*1e6)))+' --samp-rate='+str(sampleRate)+' --center-freq=437000000 --num-samples='+str(int(round(Length[i]*sampleRate)))+' --file-loc="/home/pi/Documents/Sat_Time'+str(currentTime).replace(" ","_").replace(":","_").replace(".","_")+'"'
         else:
-            # print("Before Calling GNU Code " + str(datetime.now()))
-            # debuggerFile.write("Before Calling GNU Code " + str(datetime.now()) + '\n')
-            top=record_ref
-            tb=top.record_ref(center_freq=97000000, channel_freq=97900000, file_loc='/home/pi/Documents/Ref_Time'+str(currentTime).replace(" ","_").replace(":","_").replace(".","_"), num_samples=int(round(Length[i]*sampleRate)),
-                                samp_rate=sampleRate)
+
+            # top=record_ref
+            # tb=top.record_ref(center_freq=97000000, channel_freq=97900000, file_loc='/home/pi/Documents/Ref_Time'+str(currentTime).replace(" ","_").replace(":","_").replace(".","_"), num_samples=int(round(Length[i]*sampleRate)),
+            #                     samp_rate=sampleRate)
             afterSetup=datetime.now()
             print("After calling class constructor: " + str(afterSetup))
             debuggerFile.write("After calling class constructor: " + str(afterSetup) + '\n')
-            tb.start()
+
+            # tb.start()
             afterStartingGNU=datetime.now()
             print("After calling tb.start(): " + str(afterStartingGNU))
             debuggerFile.write("After calling tb.start(): "+ str(afterStartingGNU) + '\n')
-            tb.wait()
+
+
+            # tb.wait()
+            fg=open('/home/pi/Documents/Ref_Time' + str(currentTime).replace(" ", "_").replace(":", "_").replace(".", "_"),'w+')
             afterFinishingGNU=datetime.now()
             print("After calling tb.wait(): " + str(afterFinishingGNU))
             debuggerFile.write("After calling tb.wait(): " + str(afterFinishingGNU) + '\n')
-            del tb
-            # print("After calling deleting tb: " + str(datetime.now()))
-            # debuggerFile.write("After calling deleting tb: " + str(datetime.now()) + '\n')
+
+            # del tb
+            fg.close()
 
             String = 'python /home/pi/GIT_GNU/GNU/GNU_code/Record_ref/record_ref.py --channel-freq=' + '97900000' + ' --samp-rate='+str(sampleRate)+' --center-freq=97000000 --num-samples='+str(int(round(Length[i]*sampleRate)))+' --file-loc="/home/pi/Documents/Ref_Time' + str(
                 currentTime).replace(" ", "_").replace(":", "_").replace(".", "_") + '"'
