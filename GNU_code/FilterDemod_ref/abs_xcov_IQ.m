@@ -17,15 +17,15 @@ else
     max_lag_f = max_lag;
 end
 Ts = 1 / Fs1;
-[d, lags] = xcov(abs(x1), abs(x2), max_lag_f);
+[d, lags] = xcov(x1, x2, max_lag_f);
 d_norm = abs(d)/max(abs(d));
-hold off
-figure
-plot(lags*Ts, abs(d_norm))
-xlabel('Time Delay [s]');
-ylabel('Normalized Crosscorrelation');
-title('Absolute Value Cross-covariance Plot');
-legend(strcat('first pi ',' - ',' second pi'));
+% hold off
+% figure
+% plot(lags*Ts, abs(d_norm))
+% xlabel('Time Delay [s]');
+% ylabel('Normalized Crosscorrelation');
+% title('Absolute Value Cross-covariance Plot');
+% legend(strcat('first pi ',' - ',' second pi'));
 [corr_factor, index_max] = max(abs(d));
 sample_delay = index_max - round(size(lags, 2)/2); 
 lags_matrix = d;
