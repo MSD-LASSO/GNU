@@ -1,7 +1,11 @@
 %tester
 clearvars
 close all
-mainPath='C:\Users\awian\Desktop\MSD\3_9_ref_only';
+
+% mainPath='C:\Users\awian\Desktop\MSD\3_9_ref_only';
+mainPath='C:\Users\awian\Desktop\MSD\3_12_ref_same_pi';
+
+
 pi1_directory=dir([mainPath '\pi1_filtered']);
 pi2_directory=dir([mainPath '\pi2_filtered']);
 max = size(pi2_directory, 1);
@@ -68,12 +72,12 @@ for i = 3:length(pi1_directory)
     time_delay(i-2) = sample_delay(i-2) /Fs1;
     offset(i-2,:) = -1 * time_delay(i-2) -  delta_file(i-2,:);
     t = 0:1/Fs1:(N1-1)/Fs1;
-    figure()
-    plot(t, x1+1, t, x2-1)
-    legend('First Pi', 'Second Pi')
-    xlabel('Time [s]')
-    ylabel('Signals with offsets')
-    ylim([-2.5 2.5]);
+%     figure()
+%     plot(t, x1+1, t, x2-1)
+%     legend('First Pi', 'Second Pi')
+%     xlabel('Time [s]')
+%     ylabel('Signals with offsets')
+%     ylim([-2.5 2.5]);
 end
 
 % plot_fft_IQ(pi_1_file_1);
