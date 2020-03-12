@@ -1,18 +1,19 @@
 %tester
 clearvars
 close all
-mainPath='C:\Users\devri\Documents\RIT\Sixth Semester\MSD I\GIT\GNU_non_git\3_6_refSATref_test2';
+% mainPath='C:\Users\devri\Documents\RIT\Sixth Semester\MSD I\GIT\GNU_non_git\3_6_refSATref_test2';
+mainPath='C:\Users\awian\Desktop\MSD\3_12_ref_same_pi';
 pi1_directory=dir([mainPath '\pi1_filtered']);
 pi2_directory=dir([mainPath '\pi2_filtered']);
 max = size(pi2_directory, 1);
 time_delay = zeros(max-2,1);
 sample_delay = zeros(max-2,1);
-offset = zeros(max-7,1);
+offset = zeros(max-2,1);
 delta_scheduler = zeros(max-2,1);
 delta_file = zeros(max-2,1);
-file_save_time_1 = zeros(max-7, 1);
-file_save_time_2 = zeros(max-7, 1);
-for i = 3:7
+file_save_time_1 = zeros(max-2, 1);
+file_save_time_2 = zeros(max-2, 1);
+for i = 3:size(pi2_directory,1)
     pi_1_file = [mainPath '\pi1_filtered\' pi1_directory(i).name];
     pi_2_file = [mainPath '\pi2_filtered\' pi2_directory(i).name];
     file_save_time_1(i-2) = 60*str2double(replace(extractBetween(pi1_directory(i).name, 54, 55), '_', '.')) + str2double(replace(extractBetween(pi1_directory(i).name, 57, 65), '_', '.'));
@@ -45,7 +46,7 @@ xlabel('Test Time [s]')
 offset
 
 
-save('3_6_refSATref_test2.mat');
+save('3_12_ref_same_pi.mat');
 
 
 % input_delay = -27;

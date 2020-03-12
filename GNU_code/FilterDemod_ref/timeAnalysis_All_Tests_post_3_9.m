@@ -88,14 +88,14 @@ clear x2
 clear t
 
 
-plot((file_save_time_1+file_save_time_2)/2 - (file_save_time_1(1)+file_save_time_2(1))/2, offset)
-title('Time offsets Bewteen the Pis --- Pi2 time - Pi1 time')
-ylabel('Offset Time [s]')
-xlabel('Test Time [s]')
-offset
+% plot((file_save_time_1+file_save_time_2)/2 - (file_save_time_1(1)+file_save_time_2(1))/2, offset)
+% title('Time offsets Bewteen the Pis --- Pi2 time - Pi1 time')
+% ylabel('Offset Time [s]')
+% xlabel('Test Time [s]')
+% offset
 
 
-save('3_6_refSATref_test2.mat');
+save('3_12_ref_same_pi.mat');
 
 
 % input_delay = -27;
