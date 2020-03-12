@@ -118,9 +118,10 @@ while (i<len(Date)):
         # print('Before Function Call: '+str(String))
 
         ######################### Start Function Call #########################
+        fileDirectory='/home/pi/Documents/3_12_ref_same_pi/pi1/'
         if Doppler[i] > 0:
             top=record_ref
-            tb=top.record_ref(center_freq=437000000, channel_freq=int(round(Doppler[i]*1e6)), file_loc='/home/pi/Documents/Sat_Time'+str(currentTime).replace(" ","_").replace(":","_").replace(".","_"), num_samples=int(round(Length[i]*sampleRate)),
+            tb=top.record_ref(center_freq=437000000, channel_freq=int(round(Doppler[i]*1e6)), file_loc=fileDirectory+'Sat_Time'+str(currentTime).replace(" ","_").replace(":","_").replace(".","_"), num_samples=int(round(Length[i]*sampleRate)),
                                 samp_rate=sampleRate)
             afterSetup=datetime.now()
             print("After calling class constructor: " + str(afterSetup))
@@ -138,7 +139,7 @@ while (i<len(Date)):
         else:
 
             top=record_ref
-            tb=top.record_ref(center_freq=97000000, channel_freq=97900000, file_loc='/home/pi/Documents/3_12_ref_same_pi/pi1/Ref_Time'+str(currentTime).replace(" ","_").replace(":","_").replace(".","_"), num_samples=int(round(Length[i]*sampleRate)),
+            tb=top.record_ref(center_freq=97000000, channel_freq=97900000, file_loc=fileDirectory+'Ref_Time'+str(currentTime).replace(" ","_").replace(":","_").replace(".","_"), num_samples=int(round(Length[i]*sampleRate)),
                                 samp_rate=sampleRate)
             afterSetup=datetime.now()
             print("After calling class constructor: " + str(afterSetup))
@@ -182,7 +183,7 @@ while (i<len(Date)):
         #Goal now is to find the data file we just created and rename it.
         queryString=str(currentTime).replace(" ","_").replace(":","_").replace(".","_")
         files = []
-        for (dirpath, dirnames, filenames) in os.walk('/home/pi/Documents/'):
+        for (dirpath, dirnames, filenames) in os.walk(fileDirectory):
             files.extend(filenames)
             break
 
