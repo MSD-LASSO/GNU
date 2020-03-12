@@ -212,7 +212,7 @@ while (i<len(Date)):
                 #           prefix+"Time_Scheduled_"+scheduled+"_atEntry_"+actuallyRanAt+"_afterSetup_"+afterSetupStr+
                 #           "_afterStartingGNU_"+afterStartingGNUStr+"_afterFinishingGNU_"+afterFinishingGNUStr+extension)
 
-                os.rename(r'/home/pi/Documents/'+currentFile, r'/home/pi/Documents/'+
+                os.rename(r''+fileDirectory+currentFile, r''+fileDirectory+
                           prefix+"Time_Scheduled_"+scheduled+"_atEntry_"+actuallyRanAt+"_afterSetup_"+afterSetupStr+
                           "_afterStartingGNU_"+afterStartingGNUStr+"_afterFinishingGNU_"+afterFinishingGNUStr+extension)
 
