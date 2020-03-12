@@ -138,7 +138,7 @@ while (i<len(Date)):
         else:
 
             top=record_ref
-            tb=top.record_ref(center_freq=97000000, channel_freq=97900000, file_loc='/home/pi/Documents/Ref_Time'+str(currentTime).replace(" ","_").replace(":","_").replace(".","_"), num_samples=int(round(Length[i]*sampleRate)),
+            tb=top.record_ref(center_freq=97000000, channel_freq=97900000, file_loc='/home/pi/Documents/3_12_ref_same_pi/pi2/Ref_Time'+str(currentTime).replace(" ","_").replace(":","_").replace(".","_"), num_samples=int(round(Length[i]*sampleRate)),
                                 samp_rate=sampleRate)
             afterSetup=datetime.now()
             print("After calling class constructor: " + str(afterSetup))
