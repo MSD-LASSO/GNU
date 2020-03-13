@@ -98,6 +98,7 @@ with open('/home/pi/GIT_GNU/GNU/GNU_code/Record_ref/'+fileName) as f:
         # os.system("sudo echo "+"Before Schedule utc: " + str(h1)+" >> /home/pi/Documents/debugger.txt 2>&1")
 
 i=0
+# Remove times that already passed.
 currentTime,GPS,x=getCurrentTime(x,debuggerFile)
 while i<len(Date):
     if currentTime>=Date[i]:
