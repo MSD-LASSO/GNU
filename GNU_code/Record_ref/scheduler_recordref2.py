@@ -11,7 +11,7 @@ import os
 def my_job(Date,Doppler,Length,debuggerFile):
     ######################### Start Function Call #########################
     currentTime=datetime.now()
-    fileDirectory = '/home/pi/Documents/3_13_same_pi_APS/pi2'
+    fileDirectory = '/home/pi/Documents/3_13_same_pi_APS/pi2/'
     if Doppler > 0:
         top = record_ref_second_device
         tb = top.record_ref_second_device(center_freq=437000000, channel_freq=int(round(Doppler * 1e6)),
