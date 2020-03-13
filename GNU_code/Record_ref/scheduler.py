@@ -136,6 +136,7 @@ if __name__=='__main__':
     print("Scheduler Starting Up. Time: " + str(startUp))
 
     sched = BlockingScheduler()
+
     # sched = BackgroundScheduler()
 
     # Read the times from the input text file.
