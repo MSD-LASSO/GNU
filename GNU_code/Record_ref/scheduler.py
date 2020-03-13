@@ -1,4 +1,5 @@
 from datetime import datetime, date, time
+import datetime as
 import time
 import record_ref
 from apscheduler.schedulers.blocking import BlockingScheduler
@@ -147,6 +148,7 @@ if __name__=='__main__':
     fileName = 'InputTimes.txt'
     import csv
 
+    count=0
     with open('/home/pi/GIT_GNU/GNU/GNU_code/Record_ref/' + fileName) as f:
         # with open('/home/pi/GPS/Unification_Attempt/'+fileName) as f:
         reader = csv.reader(f, delimiter='\n')
@@ -160,6 +162,8 @@ if __name__=='__main__':
             print("Before Schedule utc: " + str(h1))
             debuggerFile.write("Before Schedule utc: " + str(h1) + '\n')
             # os.system("sudo echo "+"Before Schedule utc: " + str(h1)+" >> /home/pi/Documents/debugger.txt 2>&1")
+            sched.add_job(my_job, 'date', run_date=h1, args=[Date[count], Doppler[count], Length[count], debuggerFile])
+            count += 1
 
     # file1 = open("./DopplerAccess35932.txt")
     # transform cannot do decimals or dates.
@@ -169,17 +173,17 @@ if __name__=='__main__':
     # stringAry=["2020-02-22T22:52:50.111","2020-02-22T22:52:50.111"]
     # stringAry=["2020-02-22T18:25:32.436","2020-02-22T18:25:46.352"]
 
-    count=0
-    for Str in Date:
-        h1=datetime.strptime(Str,"%Y-%m-%dT%H:%M:%S.%f")
-        outStr="Before Schedule utc: "+str(h1)
-        print(outStr)
-        debuggerFile.write(outStr+'\n')
-        # h1=utc2local(h1)
-        # print("Before Schedule local: "+str(h1))
-        # sched.add_job(my_job,'date',run_date=h1,id='job'+str(count))
-        sched.add_job(my_job,'date',run_date=h1,args=[Date[count],Doppler[count],Length[count],debuggerFile])
-        count+=1
-    # sched.add_job(my_job, 'date', run_date=datetime(2020, 2, 22, 12, 36, 33,43534), args=['testing'])
+    # count=0
+    # for Str in Date:
+    #     h1=datetime.strptime(Str,"%Y-%m-%dT%H:%M:%S.%f")
+    #     outStr="Before Schedule utc: "+str(h1)
+    #     print(outStr)
+    #     debuggerFile.write(outStr+'\n')
+    #     # h1=utc2local(h1)
+    #     # print("Before Schedule local: "+str(h1))
+    #     # sched.add_job(my_job,'date',run_date=h1,id='job'+str(count))
+    #     sched.add_job(my_job, 'date', run_date=h1, args=[Date[count], Doppler[count], Length[count], debuggerFile])
+    #     count += 1
+    # # sched.add_job(my_job, 'date', run_date=datetime(2020, 2, 22, 12, 36, 33,43534), args=['testing'])
 
     sched.start()
