@@ -39,8 +39,8 @@ def my_job(Date,Doppler,Length,debuggerFile):
             " ", "_").replace(":", "_").replace(".", "_") + '"'
     else:
 
-        top = record_ref
-        tb = top.record_ref(center_freq=97000000, channel_freq=97900000,
+        top = record_ref_second_device
+        tb = top.record_ref_second_device(center_freq=97000000, channel_freq=97900000,
                                           file_loc=fileDirectory + '/Ref_Time' + str(currentTime).replace(" ",
                                                                                                           "_").replace(
                                               ":", "_").replace(".", "_"),
