@@ -85,11 +85,13 @@ def my_job(Date,Doppler,Length,debuggerFile):
 
     # Goal now is to find the data file we just created and rename it.
     queryString = str(currentTime).replace(" ", "_").replace(":", "_").replace(".", "_")
+    print("Queried: "+queryString)
     files = []
     for (dirpath, dirnames, filenames) in os.walk(fileDirectory):
         files.extend(filenames)
         break
 
+    print(files)
     for currentFile in files:
         if currentFile.__contains__(queryString):
             # Now we rename the file
@@ -112,9 +114,9 @@ def my_job(Date,Doppler,Length,debuggerFile):
             afterFinishingGNU.minute, afterFinishingGNU.second, str(afterFinishingGNU.microsecond))
 
             # print("FileName: ")
-            # print('/home/pi/Documents/'+
-            #           prefix+"Time_Scheduled_"+scheduled+"_atEntry_"+actuallyRanAt+"_afterSetup_"+afterSetupStr+
-            #           "_afterStartingGNU_"+afterStartingGNUStr+"_afterFinishingGNU_"+afterFinishingGNUStr+extension)
+            print(fileDirectory+
+                      prefix+"Time_Scheduled_"+scheduled+"_atEntry_"+actuallyRanAt+"_afterSetup_"+afterSetupStr+
+                      "_afterStartingGNU_"+afterStartingGNUStr+"_afterFinishingGNU_"+afterFinishingGNUStr+extension)
 
             os.rename(r'' + fileDirectory + currentFile, r'' + fileDirectory +
                       prefix + "Time_Scheduled_" + scheduled + "_atEntry_" + actuallyRanAt + "_afterSetup_" + afterSetupStr +

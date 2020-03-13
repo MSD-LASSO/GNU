@@ -47,7 +47,7 @@ def argument_parser():
     # Notice timedelta is 4 hours during daylight savings time
     # Eastern Standard Time is 5 hours.
     parser.add_option(
-        "", "--startTime", dest="startTime", type="string", default=str(dt.now().date())+'T'+str((dt.now()+bigDT.timedelta(hours=4,minutes=2)).time()),
+        "", "--startTime", dest="startTime", type="string", default=str(dt.now().date())+'T'+str((dt.now()+bigDT.timedelta(hours=4,minutes=1)).time()),
         help="Set DateTime in form 'YY-MM-DDTHH-MM-SS.fff' [default=%default]")
     parser.add_option(
         "", "--delay", dest="delay", type="float", default=20,
