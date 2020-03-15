@@ -44,6 +44,7 @@ debuggerFile.write("Scheduler Starting Up. Time: "+str(startUp)+'\n')
 print("Scheduler Starting Up. Time: "+str(startUp))
 # os.system("sudo echo IRan! >> /home/pi/Documents/debugger.txt 2>&1")
 # try:
+x=[]
 # x = L76X.L76X()
 # x.L76X_Set_Baudrate(9600)
 # x.L76X_Send_Command(x.SET_NMEA_BAUDRATE_115200)
@@ -63,7 +64,6 @@ print("Scheduler Starting Up. Time: "+str(startUp))
 
 # debuggerFile.write("Completed GPS Setup. Time: "+str(datetime.now())+'\n')
 # print("Completed GPS Setup. Time: "+str(datetime.now()))
-
 
 
 # f = open("Coordinates.txt", "w+")
