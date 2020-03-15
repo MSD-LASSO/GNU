@@ -118,7 +118,8 @@ while (i<len(Date)):
         # print('Before Function Call: '+str(String))
 
         ######################### Start Function Call #########################
-        fileDirectory='/home/pi/Documents/3_12_ref_same_pi/pi2/'
+        # fileDirectory='/home/pi/Documents/3_12_ref_same_pi/pi2/'
+        fileDirectory='/run/media/pentoo/NEW VOLUME/Documents/3_15_pentoo/pi2/'
         if Doppler[i] > 0:
             top=record_ref_second_device
             tb=top.record_ref_second_device(center_freq=437000000, channel_freq=int(round(Doppler[i]*1e6)), file_loc=fileDirectory+'Sat_Time'+str(currentTime).replace(" ","_").replace(":","_").replace(".","_"), num_samples=int(round(Length[i]*sampleRate)),
