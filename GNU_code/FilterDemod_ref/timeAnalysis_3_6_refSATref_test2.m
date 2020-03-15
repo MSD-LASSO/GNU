@@ -2,7 +2,8 @@
 clearvars
 close all
 % mainPath='C:\Users\devri\Documents\RIT\Sixth Semester\MSD I\GIT\GNU_non_git\3_6_refSATref_test2';
-mainPath='C:\Users\awian\Desktop\MSD\3_12_ref_same_pi';
+mainPath='C:\Users\awian\Desktop\MSD\3_6_refsatref_test2';
+
 pi1_directory=dir([mainPath '\pi1_filtered']);
 pi2_directory=dir([mainPath '\pi2_filtered']);
 max = size(pi2_directory, 1);
@@ -25,19 +26,24 @@ for i = 3:size(pi2_directory,1)
     time_delay(i-2) = sample_delay(i-2) /Fs1;
     offset(i-2) = -1 * time_delay(i-2) -  delta_file(i-2);
     t = 0:1/Fs1:(N1-1)/Fs1;
-    figure
-    plot(t, x1+1, t, x2-1)
-    legend('First Pi', 'Second Pi')
-    xlabel('Time [s]')
-    ylabel('Signals with offsets')
-    ylim([-2.5 2.5]);
+%     figure
+%     plot(t, x1+1, t, x2-1)
+%     legend('First Pi', 'Second Pi')
+%     xlabel('Time [s]')
+%     ylabel('Signals with offsets')
+%     ylim([-2.5 2.5]);
 end
 
 % plot_fft_IQ(pi_1_file_1);
 % plot_fft_IQ(pi_2_file_1);
+clear x1
+clear x2
+clear t
 
-
-
+offset=[time_delay offset];
+m=mean(abs(offset));
+s=std(abs(offset));
+disp(mean(abs(offset))); disp(std(abs(offset)))
 
 plot((file_save_time_1+file_save_time_2)/2 - (file_save_time_1(1)+file_save_time_2(1))/2, offset)
 title('Time offsets Bewteen the Pis --- Pi2 time - Pi1 time')
@@ -46,7 +52,7 @@ xlabel('Test Time [s]')
 offset
 
 
-save('3_12_ref_same_pi.mat');
+save('3_6_refsatref.mat');
 
 
 % input_delay = -27;

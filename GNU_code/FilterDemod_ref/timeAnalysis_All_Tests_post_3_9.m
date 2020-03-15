@@ -2,8 +2,9 @@
 clearvars
 close all
 
-mainPath='C:\Users\awian\Desktop\MSD\3_9_ref_only';
+% mainPath='C:\Users\awian\Desktop\MSD\3_9_ref_only';
 % mainPath='C:\Users\awian\Desktop\MSD\3_12_ref_same_pi';
+mainPath='C:\Users\awian\Desktop\MSD\3_13_same_pi_APS';
 
 
 pi1_directory=dir([mainPath '\pi1_filtered']);
@@ -97,7 +98,7 @@ offset=[time_delay offset];
 m=mean(abs(offset));
 s=std(abs(offset));
 disp(mean(abs(offset))); disp(std(abs(offset)))
-save('3_12_ref_same_pi.mat');
+save('3_13_ref_same_pi_APS_extended.mat');
 
 
 % input_delay = -27;
