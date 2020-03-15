@@ -85,7 +85,7 @@ sampleRate=2000000
 fileName='InputTimes.txt'
 import csv
 # with open('/home/pi/GIT_GNU/GNU/GNU_code/Record_ref/'+fileName) as f:
-with open('/home/pentoo/Documents/GIT_GNU/GNU/GNU_code/Record_ref'+fileName) as f:
+with open('/home/pentoo/Documents/GIT_GNU/GNU/GNU_code/Record_ref/'+fileName) as f:
 # with open('/home/pi/GPS/Unification_Attempt/'+fileName) as f:
     reader=csv.reader(f,delimiter='\n')
     for row in reader:
