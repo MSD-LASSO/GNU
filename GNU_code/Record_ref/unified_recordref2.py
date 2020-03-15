@@ -39,7 +39,8 @@ def getCurrentTime(GPShandler,debuggerFile):
     return currentTime,GPS,GPShandler
 
 startUp=datetime.now()
-debuggerFile = open('/home/pi/Documents/schedulerDebugger'+str(startUp).replace(" ", "_").replace(":", "_").replace(".", "_")+'.txt', "w+")
+# debuggerFile = open('/home/pi/Documents/schedulerDebugger'+str(startUp).replace(" ", "_").replace(":", "_").replace(".", "_")+'.txt', "w+")
+debuggerFile = open('/run/media/pentoo/NEW VOLUME/Documents/schedulerDebugger'+str(startUp).replace(" ", "_").replace(":", "_").replace(".", "_")+'.txt', "w+")
 debuggerFile.write("Scheduler Starting Up. Time: "+str(startUp)+'\n')
 print("Scheduler Starting Up. Time: "+str(startUp))
 # os.system("sudo echo IRan! >> /home/pi/Documents/debugger.txt 2>&1")
@@ -83,7 +84,8 @@ sampleRate=2000000
 #IMPORTANT: Cannot have extra white space at end of InputTimes.txt. It will throw "index out of range" error
 fileName='InputTimes.txt'
 import csv
-with open('/home/pi/GIT_GNU/GNU/GNU_code/Record_ref/'+fileName) as f:
+# with open('/home/pi/GIT_GNU/GNU/GNU_code/Record_ref/'+fileName) as f:
+with open('/home/pentoo/Documents/GIT_GNU/GNU/GNU_code/Record_ref'+fileName) as f:
 # with open('/home/pi/GPS/Unification_Attempt/'+fileName) as f:
     reader=csv.reader(f,delimiter='\n')
     for row in reader:
