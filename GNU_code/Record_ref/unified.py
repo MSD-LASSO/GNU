@@ -1,4 +1,5 @@
-import L76X
+# import L76X
+
 import time
 import record_ref
 from datetime import datetime, date
@@ -43,28 +44,27 @@ debuggerFile.write("Scheduler Starting Up. Time: "+str(startUp)+'\n')
 print("Scheduler Starting Up. Time: "+str(startUp))
 # os.system("sudo echo IRan! >> /home/pi/Documents/debugger.txt 2>&1")
 # try:
-x = L76X.L76X()
-x.L76X_Set_Baudrate(9600)
-x.L76X_Send_Command(x.SET_NMEA_BAUDRATE_115200)
-time.sleep(2)
-x.L76X_Send_Command(x.SET_NMEA_BAUDRATE_115200)
-time.sleep(2)
-x.L76X_Send_Command(x.SET_NMEA_BAUDRATE_115200)
-time.sleep(2)
-x.L76X_Set_Baudrate(115200)
-x.L76X_Send_Command(x.SET_NMEA_BAUDRATE_115200)
-time.sleep(2)
+# x = L76X.L76X()
+# x.L76X_Set_Baudrate(9600)
+# x.L76X_Send_Command(x.SET_NMEA_BAUDRATE_115200)
+# time.sleep(2)
+# x.L76X_Send_Command(x.SET_NMEA_BAUDRATE_115200)
+# time.sleep(2)
+# x.L76X_Send_Command(x.SET_NMEA_BAUDRATE_115200)
+# time.sleep(2)
+# x.L76X_Set_Baudrate(115200)
+# x.L76X_Send_Command(x.SET_NMEA_BAUDRATE_115200)
+# time.sleep(2)
+#
+# x.L76X_Send_Command(x.SET_POS_FIX_100MS);
+#
+# # Set output message
+# x.L76X_Send_Command(x.SET_NMEA_OUTPUT);
 
-x.L76X_Send_Command(x.SET_POS_FIX_100MS);
-
-# Set output message
-x.L76X_Send_Command(x.SET_NMEA_OUTPUT);
-
-debuggerFile.write("Completed GPS Setup. Time: "+str(datetime.now())+'\n')
-print("Completed GPS Setup. Time: "+str(datetime.now()))
+# debuggerFile.write("Completed GPS Setup. Time: "+str(datetime.now())+'\n')
+# print("Completed GPS Setup. Time: "+str(datetime.now()))
 
 
-# x.L76X_Exit_BackupMode();
 
 # f = open("Coordinates.txt", "w+")
 
