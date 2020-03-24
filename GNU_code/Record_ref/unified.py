@@ -22,7 +22,7 @@ def getCurrentTime(GPShandler,debuggerFile):
         GPS=True
         # # 2020-3-1
         # # 20:17:2.5
-        Str=x.Date+'T'+x.Time
+        Str=GPShandler.Date+'T'+GPShandler.Time
         print(Str)
         # # Str='2020-3-1'+'T'+'20:17:2.5'
         try:
@@ -152,12 +152,14 @@ while (i<len(Date)):
             top=record_ref
             tb=top.record_ref(center_freq=97000000, channel_freq=97900000, file_loc=fileDirectory+'Ref_Time'+str(currentTime).replace(" ","_").replace(":","_").replace(".","_"), num_samples=int(round(Length[i]*sampleRate)),
                                 samp_rate=sampleRate)
-            afterSetup=datetime.now()
+            # afterSetup=datetime.now()
+            afterSetup=getCurrentTime(x,debuggerFile)
             print("After calling class constructor: " + str(afterSetup))
             debuggerFile.write("After calling class constructor: " + str(afterSetup) + '\n')
 
             tb.start()
-            afterStartingGNU=datetime.now()
+            # afterStartingGNU=datetime.now()
+            afterStartingGNU=getCurrentTime(x,debuggerFile)
             print("After calling tb.start(): " + str(afterStartingGNU))
             debuggerFile.write("After calling tb.start(): "+ str(afterStartingGNU) + '\n')
 
@@ -165,7 +167,8 @@ while (i<len(Date)):
             tb.wait()
             # Use this along with fg.close for timing tests WITHOUT GNU radio.
             # fg=open('/home/pi/Documents/Ref_Time' + str(currentTime).replace(" ", "_").replace(":", "_").replace(".", "_"),'w+')
-            afterFinishingGNU=datetime.now()
+            # afterFinishingGNU=datetime.now()
+            afterFinishingGNU=getCurrentTime(x,debuggerFile)
             print("After calling tb.wait(): " + str(afterFinishingGNU))
             debuggerFile.write("After calling tb.wait(): " + str(afterFinishingGNU) + '\n')
 
