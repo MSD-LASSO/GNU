@@ -5,7 +5,7 @@ import os
 
 def main(top=filterDemod_ref, options=None):
     # Directory to find the source files. This must be changed every time.
-    directoryToFiles = "../../../../3_12_ref_same_pi/"
+    directoryToFiles = "../../../../Documents/3_24_shrewsbury/"
 
     # Change the sample rate from 2million if applicable
     sampleRate = 2000000
