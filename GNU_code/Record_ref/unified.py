@@ -25,7 +25,11 @@ def getCurrentTime(GPShandler,debuggerFile):
         Str=x.Date+'T'+x.Time
         print(Str)
         # # Str='2020-3-1'+'T'+'20:17:2.5'
-        currentTime = datetime.strptime(Str, "%Y-%m-%dT%H:%M:%S.%f")
+        try:
+            currentTime = datetime.strptime(Str, "%Y-%m-%dT%H:%M:%S.%f")
+        except:
+            GPS = False
+            currentTime = datetime.now()
         # GPS=False
         # currentTime=datetime.now()
 
