@@ -39,8 +39,8 @@ def getCurrentTime(GPShandler,debuggerFile):
     return currentTime,GPS,GPShandler
 
 startUp=datetime.now()
-# debuggerFile = open('/home/pi/Documents/schedulerDebugger'+str(startUp).replace(" ", "_").replace(":", "_").replace(".", "_")+'.txt', "w+")
-debuggerFile = open('/run/media/pentoo/NEW VOLUME/Documents/schedulerDebugger'+str(startUp).replace(" ", "_").replace(":", "_").replace(".", "_")+'.txt', "w+")
+debuggerFile = open('/home/pi/Documents/schedulerDebugger'+str(startUp).replace(" ", "_").replace(":", "_").replace(".", "_")+'.txt', "w+")
+# debuggerFile = open('/run/media/pentoo/NEW VOLUME/Documents/schedulerDebugger'+str(startUp).replace(" ", "_").replace(":", "_").replace(".", "_")+'.txt', "w+")
 debuggerFile.write("Scheduler Starting Up. Time: "+str(startUp)+'\n')
 print("Scheduler Starting Up. Time: "+str(startUp))
 # os.system("sudo echo IRan! >> /home/pi/Documents/debugger.txt 2>&1")
@@ -84,8 +84,8 @@ sampleRate=2000000
 #IMPORTANT: Cannot have extra white space at end of InputTimes.txt. It will throw "index out of range" error
 fileName='InputTimes.txt'
 import csv
-# with open('/home/pi/GIT_GNU/GNU/GNU_code/Record_ref/'+fileName) as f:
-with open('/home/pentoo/Documents/GIT_GNU/GNU/GNU_code/Record_ref/'+fileName) as f:
+with open('/home/pi/GIT_GNU/GNU/GNU_code/Record_ref/'+fileName) as f:
+# with open('/home/pentoo/Documents/GIT_GNU/GNU/GNU_code/Record_ref/'+fileName) as f:
 # with open('/home/pi/GPS/Unification_Attempt/'+fileName) as f:
     reader=csv.reader(f,delimiter='\n')
     for row in reader:
@@ -121,8 +121,8 @@ while (i<len(Date)):
         # print('Before Function Call: '+str(String))
 
         ######################### Start Function Call #########################
-        # fileDirectory='/home/pi/Documents/3_12_ref_same_pi/pi1/'
-        fileDirectory='/run/media/pentoo/NEW VOLUME/Documents/3_15_pentoo/pi1/'
+        fileDirectory='/home/pi/Documents/3_12_ref_same_pi/pi1/'
+        # fileDirectory='/run/media/pentoo/NEW VOLUME/Documents/3_15_pentoo/pi1/'
         if Doppler[i] > 0:
             top=record_ref
             tb=top.record_ref(center_freq=437000000, channel_freq=int(round(Doppler[i]*1e6)), file_loc=fileDirectory+'Sat_Time'+str(currentTime).replace(" ","_").replace(":","_").replace(".","_"), num_samples=int(round(Length[i]*sampleRate)),
