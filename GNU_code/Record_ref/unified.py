@@ -19,14 +19,14 @@ def getCurrentTime(GPShandler,debuggerFile):
 
     #Get the current time to the best of our ability.
     if (status==0):
-        # GPS=True
+        GPS=True
         # # 2020-3-1
         # # 20:17:2.5
         # Str=x.Date+'T'+x.Time
         # # Str='2020-3-1'+'T'+'20:17:2.5'
-        # currentTime = datetime.strptime(Str, "%Y-%m-%dT%H:%M:%S.%f")
-        GPS=False
-        currentTime=datetime.now()
+        currentTime = datetime.strptime(Str, "%Y-%m-%dT%H:%M:%S.%f")
+        # GPS=False
+        # currentTime=datetime.now()
 
     else:
         # print('No positioning')
@@ -167,7 +167,11 @@ while (i<len(Date)):
             del tb
             # fg.close()
 
-            String = 'python /home/pi/GIT_GNU/GNU/GNU_code/Record_ref/record_ref.py --channel-freq=' + '97900000' + ' --samp-rate='+str(sampleRate)+' --center-freq=97000000 --num-samples='+str(int(round(Length[i]*sampleRate)))+' --file-loc="/home/pi/Documents/Ref_Time' + str(
+            # String = 'python /home/pi/GIT_GNU/GNU/GNU_code/Record_ref/record_ref.py --channel-freq=' + '97900000' + ' --samp-rate='+str(sampleRate)+' --center-freq=97000000 --num-samples='+str(int(round(Length[i]*sampleRate)))+' --file-loc="/home/pi/Documents/Ref_Time' + str(
+            #     currentTime).replace(" ", "_").replace(":", "_").replace(".", "_") + '"'
+
+            # For Shrewsbury
+            String = 'python /home/pi/GIT_GNU/GNU/GNU_code/Record_ref/record_ref.py --channel-freq=' + '97300000' + ' --samp-rate='+str(sampleRate)+' --center-freq=97000000 --num-samples='+str(int(round(Length[i]*sampleRate)))+' --file-loc="/home/pi/Documents/Ref_Time' + str(
                 currentTime).replace(" ", "_").replace(":", "_").replace(".", "_") + '"'
 
 
