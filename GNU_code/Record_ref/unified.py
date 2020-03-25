@@ -128,7 +128,7 @@ while (i<len(Date)):
         # print('Before Function Call: '+str(String))
 
         ######################### Start Function Call #########################
-        fileDirectory='/home/pi/Documents/3_24_ref_shrewsbury/'
+        fileDirectory='/home/pi/Documents/'
         # fileDirectory='/run/media/pentoo/NEW VOLUME/Documents/3_15_pentoo/pi1/'
         if Doppler[i] > 0:
             top=record_ref
