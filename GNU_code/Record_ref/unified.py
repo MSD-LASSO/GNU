@@ -134,15 +134,15 @@ while (i<len(Date)):
             top=record_ref
             tb=top.record_ref(center_freq=437000000, channel_freq=int(round(Doppler[i]*1e6)), file_loc=fileDirectory+'Sat_Time'+str(currentTime).replace(" ","_").replace(":","_").replace(".","_"), num_samples=int(round(Length[i]*sampleRate)),
                                 samp_rate=sampleRate)
-            afterSetup=datetime.now()
+            afterSetup,GPS,x=getCurrentTime(x,debuggerFile)
             print("After calling class constructor: " + str(afterSetup))
             debuggerFile.write("After calling class constructor: " + str(afterSetup) + '\n')
             tb.start()
-            afterStartingGNU=datetime.now()
+            afterStartingGNU,GPS,x=getCurrentTime(x,debuggerFile)
             print("After calling tb.start(): " + str(afterStartingGNU))
             debuggerFile.write("After calling tb.start(): "+ str(afterStartingGNU) + '\n')
             tb.wait()
-            afterFinishingGNU=datetime.now()
+            afterFinishingGNU,GPS,x=getCurrentTime(x,debuggerFile)
             print("After calling tb.wait(): " + str(afterFinishingGNU))
             debuggerFile.write("After calling tb.wait(): " + str(afterFinishingGNU) + '\n')
             del tb
