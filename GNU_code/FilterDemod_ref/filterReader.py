@@ -5,12 +5,13 @@ import os
 
 def main(top=filterDemod_ref, options=None):
     # Directory to find the source files. This must be changed every time.
-    directoryToFiles = "../../../../Documents/3_24_ref_shrewsbury/"
+    directoryToFiles = "../../../../Documents/hailMary/"
 
     # Change the sample rate from 2million if applicable
     sampleRate = 2000000
     # cutoff_Freq is how wide the filter is. Narrower for narrower signals?
-    cutoff_freq = 80000
+    # cutoff_freq = 80000
+    cutoff_freq = 5000
 
     for i in range(2):
         # Make the output directories

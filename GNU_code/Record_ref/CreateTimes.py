@@ -19,7 +19,7 @@ def createText(startTime,delay,numEntries,oscillate,sampleLength):
             dateObj += bigDT.timedelta(seconds=referenceLength + delay)
             writeToText(f, dateObj, 437.15, sampleLength)
         else:
-            writeToText(f, dateObj, 437.125, sampleLength)
+            writeToText(f, dateObj, 0, sampleLength)
         dateObj += bigDT.timedelta(seconds=sampleLength + delay)
 
 
