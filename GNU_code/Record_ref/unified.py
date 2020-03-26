@@ -132,7 +132,7 @@ while (i<len(Date)):
         # fileDirectory='/run/media/pentoo/NEW VOLUME/Documents/3_15_pentoo/pi1/'
         if Doppler[i] > 0:
             top=record_ref
-            tb=top.record_ref(center_freq=465500000, channel_freq=int(round(Doppler[i]*1e6)), file_loc=fileDirectory+'Sat_Time'+str(currentTime).replace(" ","_").replace(":","_").replace(".","_"), num_samples=int(round(Length[i]*sampleRate)),
+            tb=top.record_ref(center_freq=436625000, channel_freq=int(round(Doppler[i]*1e6)), file_loc=fileDirectory+'Sat_Time'+str(currentTime).replace(" ","_").replace(":","_").replace(".","_"), num_samples=int(round(Length[i]*sampleRate)),
                                 samp_rate=sampleRate)
             afterSetup,GPS,x=getCurrentTime(x,debuggerFile)
             print("After calling class constructor: " + str(afterSetup))
@@ -175,11 +175,7 @@ while (i<len(Date)):
             del tb
             # fg.close()
 
-            # String = 'python /home/pi/GIT_GNU/GNU/GNU_code/Record_ref/record_ref.py --channel-freq=' + '97900000' + ' --samp-rate='+str(sampleRate)+' --center-freq=97000000 --num-samples='+str(int(round(Length[i]*sampleRate)))+' --file-loc="/home/pi/Documents/Ref_Time' + str(
-            #     currentTime).replace(" ", "_").replace(":", "_").replace(".", "_") + '"'
-
-            # For Shrewsbury
-            String = 'python /home/pi/GIT_GNU/GNU/GNU_code/Record_ref/record_ref.py --channel-freq=' + '96100000' + ' --samp-rate='+str(sampleRate)+' --center-freq=95700000 --num-samples='+str(int(round(Length[i]*sampleRate)))+' --file-loc="/home/pi/Documents/Ref_Time' + str(
+            String = 'python /home/pi/GIT_GNU/GNU/GNU_code/Record_ref/record_ref.py --channel-freq=' + '97900000' + ' --samp-rate='+str(sampleRate)+' --center-freq=97000000 --num-samples='+str(int(round(Length[i]*sampleRate)))+' --file-loc="/home/pi/Documents/Ref_Time' + str(
                 currentTime).replace(" ", "_").replace(":", "_").replace(".", "_") + '"'
 
 
