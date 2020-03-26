@@ -29,12 +29,14 @@ def main(top=filterDemod_ref, options=None):
         # Iterate through all files in the source directory. If the file is not a header file or a debugger file as
         # identified by "hdr" and "Debugger", then we filter that file.
         # We specify the input and outputh paths and run GNUradio filterDemod_ref.py
+        print("past pi_filtered folder creation")
         j=0
         while(j<len(files)):
             inputFile=files[j]
             if inputFile.__contains__("hdr")==0 & inputFile.__contains__("Debugger")==0:
                 inputPath=directoryToFiles+'/pi'+str(i+1)+'/'+inputFile
                 outputName = directoryToFiles+'/pi'+str(i+1)+'_filtered/'+inputFile+".wav"
+                print("before calling GNU to filter signal")
                 # print(outputName)
 
                 # tb = top(cutoff_freq=cutoff_freq, samp_rate=sampleRate, save_file=outputName,
