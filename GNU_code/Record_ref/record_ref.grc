@@ -117,7 +117,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(192, 268)</value>
+      <value>(224, 340)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -184,7 +184,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(808, 276)</value>
+      <value>(736, 276)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -220,57 +220,6 @@
     </param>
   </block>
   <block>
-    <key>blocks_file_sink</key>
-    <param>
-      <key>append</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>file</key>
-      <value>file_loc+"_END_"+str(datetime.datetime.now()).replace(" ","_").replace(":","_").replace(".","_")</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(800, 164)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_file_sink_1</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>complex</value>
-    </param>
-    <param>
-      <key>unbuffered</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-  </block>
-  <block>
     <key>blocks_head</key>
     <param>
       <key>alias</key>
@@ -290,7 +239,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(640, 180)</value>
+      <value>(584, 324)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -341,7 +290,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(488, 168)</value>
+      <value>(464, 312)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -514,6 +463,53 @@
     </param>
   </block>
   <block>
+    <key>parameter</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(104, 476)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>hackrf_index</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value>hackrf_index</value>
+    </param>
+    <param>
+      <key>short_id</key>
+      <value></value>
+    </param>
+    <param>
+      <key>hide</key>
+      <value>none</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>intx</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
     <key>import</key>
     <param>
       <key>alias</key>
@@ -529,7 +525,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(480, 36)</value>
+      <value>(192, 12)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1887,7 +1883,7 @@
     </param>
     <param>
       <key>args</key>
-      <value>hackrf=0,bias=1</value>
+      <value>hackrf=hackrf_index,bias=1</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -1895,7 +1891,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(192, 24)</value>
+      <value>(224, 104)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2054,12 +2050,6 @@
   <connection>
     <source_block_id>blocks_head_0</source_block_id>
     <sink_block_id>blocks_file_meta_sink_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_head_0</source_block_id>
-    <sink_block_id>blocks_file_sink_1</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>

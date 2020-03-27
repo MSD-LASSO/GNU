@@ -19,7 +19,7 @@ end
 Ts = 1 / Fs1;
 [d, lags] = xcov(x1, x2, max_lag_f);
 d_norm = abs(d)/max(abs(d));
-% hold off
+hold off
 figure
 plot(lags*Ts, abs(d_norm))
 xlabel('Time Delay [s]');

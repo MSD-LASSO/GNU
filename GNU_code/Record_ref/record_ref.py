@@ -21,7 +21,7 @@ import time
 
 class record_ref(gr.top_block):
 
-    def __init__(self, center_freq=97000000, channel_freq=97900000, file_loc="/dev/null", num_samples=10000000, samp_rate=2000000):
+    def __init__(self, center_freq=97000000, channel_freq=97900000, file_loc="/dev/null", hackrf_index=0, num_samples=10000000, samp_rate=2000000):
         gr.top_block.__init__(self, "Record Ref")
 
         ##################################################
@@ -30,13 +30,14 @@ class record_ref(gr.top_block):
         self.center_freq = center_freq
         self.channel_freq = channel_freq
         self.file_loc = file_loc
+        self.hackrf_index = hackrf_index
         self.num_samples = num_samples
         self.samp_rate = samp_rate
 
         ##################################################
         # Blocks
         ##################################################
-        self.osmosdr_source_0 = osmosdr.source( args="numchan=" + str(1) + " " + 'hackrf=0,bias=1' )
+        self.osmosdr_source_0 = osmosdr.source( args="numchan=" + str(1) + " " + 'hackrf=hackrf_index,bias=1' )
         self.osmosdr_source_0.set_clock_source('external', 0)
         self.osmosdr_source_0.set_time_source('external', 0)
         self.osmosdr_source_0.set_time_now(osmosdr.time_spec_t(time.time()), osmosdr.ALL_MBOARDS)
@@ -90,6 +91,12 @@ class record_ref(gr.top_block):
         self.file_loc = file_loc
         self.blocks_file_meta_sink_0.open(self.file_loc+"_END_"+str(datetime.datetime.now()).replace(" ","_").replace(":","_").replace(".","_"))
 
+    def get_hackrf_index(self):
+        return self.hackrf_index
+
+    def set_hackrf_index(self, hackrf_index):
+        self.hackrf_index = hackrf_index
+
     def get_num_samples(self):
         return self.num_samples
 
@@ -118,6 +125,9 @@ def argument_parser():
         "", "--file-loc", dest="file_loc", type="string", default="/dev/null",
         help="Set /dev/null [default=%default]")
     parser.add_option(
+        "", "--hackrf-index", dest="hackrf_index", type="intx", default=0,
+        help="Set hackrf_index [default=%default]")
+    parser.add_option(
         "", "--num-samples", dest="num_samples", type="intx", default=10000000,
         help="Set num_samples [default=%default]")
     parser.add_option(
@@ -130,11 +140,9 @@ def main(top_block_cls=record_ref, options=None):
     if options is None:
         options, _ = argument_parser().parse_args()
 
-    tb = top_block_cls(center_freq=options.center_freq, channel_freq=options.channel_freq, file_loc=options.file_loc, num_samples=options.num_samples, samp_rate=options.samp_rate)
+    tb = top_block_cls(center_freq=options.center_freq, channel_freq=options.channel_freq, file_loc=options.file_loc, hackrf_index=options.hackrf_index, num_samples=options.num_samples, samp_rate=options.samp_rate)
     tb.start()
     tb.wait()
-
-    time.sleep(10)
 
 
 if __name__ == '__main__':

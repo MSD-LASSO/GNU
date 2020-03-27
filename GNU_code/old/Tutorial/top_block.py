@@ -16,13 +16,15 @@ if __name__ == '__main__':
         except:
             print "Warning: failed to XInitThreads()"
 
-from gnuradio import audio
 from gnuradio import blocks
 from gnuradio import eng_notation
-from gnuradio import filter
 from gnuradio import gr
+from gnuradio import wxgui
 from gnuradio.eng_option import eng_option
+from gnuradio.fft import window
 from gnuradio.filter import firdes
+from gnuradio.wxgui import fftsink2
+from gnuradio.wxgui import waterfallsink2
 from grc_gnuradio import wxgui as grc_wxgui
 from optparse import OptionParser
 import pmt
@@ -40,77 +42,61 @@ class top_block(grc_wxgui.top_block_gui):
         # Variables
         ##################################################
         self.samp_rate = samp_rate = 2e6
-        self.channel_width = channel_width = 200e3
-        self.channel_freq = channel_freq = 96.5e6
-        self.center_freq = center_freq = 97.9e6
 
         ##################################################
         # Blocks
         ##################################################
-        self.rational_resampler_xxx_0_0 = filter.rational_resampler_fff(
-                interpolation=12,
-                decimation=5,
-                taps=None,
-                fractional_bw=None,
+        self.wxgui_waterfallsink2_0 = waterfallsink2.waterfall_sink_c(
+        	self.GetWin(),
+        	baseband_freq=0,
+        	dynamic_range=100,
+        	ref_level=0,
+        	ref_scale=2.0,
+        	sample_rate=samp_rate,
+        	fft_size=512,
+        	fft_rate=15,
+        	average=False,
+        	avg_alpha=None,
+        	title='Waterfall Plot',
         )
-        self.rational_resampler_xxx_0 = filter.rational_resampler_fff(
-                interpolation=12,
-                decimation=5,
-                taps=None,
-                fractional_bw=None,
+        self.Add(self.wxgui_waterfallsink2_0.win)
+        self.wxgui_fftsink2_0_0 = fftsink2.fft_sink_c(
+        	self.GetWin(),
+        	baseband_freq=0,
+        	y_per_div=10,
+        	y_divs=10,
+        	ref_level=0,
+        	ref_scale=2.0,
+        	sample_rate=samp_rate,
+        	fft_size=1024,
+        	fft_rate=15,
+        	average=True,
+        	avg_alpha=None,
+        	title='FFT Plot',
+        	peak_hold=False,
         )
-        self.low_pass_filter_0_0 = filter.fir_filter_fff(int(samp_rate/channel_width), firdes.low_pass(
-        	1, samp_rate, 750e3, 250e3, firdes.WIN_HAMMING, 6.76))
-        self.low_pass_filter_0 = filter.fir_filter_fff(int(samp_rate/channel_width), firdes.low_pass(
-        	1, samp_rate, 750e3, 250e3, firdes.WIN_HAMMING, 6.76))
-        self.blocks_multiply_const_vxx_0_0 = blocks.multiply_const_vff((2, ))
-        self.blocks_multiply_const_vxx_0 = blocks.multiply_const_vff((2, ))
-        self.blocks_file_source_0_1 = blocks.file_source(gr.sizeof_float*1, 'C:\\Users\\devri\\Documents\\RIT\\Sixth Semester\\MSD I\\GIT\\GNU_non_git\\2_22_filtered\\pi2_test2_pxy.wav', True)
-        self.blocks_file_source_0_1.set_begin_tag(pmt.PMT_NIL)
-        self.blocks_file_source_0 = blocks.file_source(gr.sizeof_float*1, 'C:\\Users\\devri\\Documents\\RIT\\Sixth Semester\\MSD I\\GIT\\GNU_non_git\\2_22_filtered\\pi1_test2_pxy.wav', True)
+        self.Add(self.wxgui_fftsink2_0_0.win)
+        self.blocks_throttle_0 = blocks.throttle(gr.sizeof_gr_complex*1, samp_rate,True)
+        self.blocks_file_source_0 = blocks.file_source(gr.sizeof_gr_complex*1, 'C:\\Users\\devri\\Documents\\RIT\\Sixth Semester\\MSD I\\GIT\\GNU_non_git\\hailmary_LUSAT\\pi2\\Sat_Time_Scheduled_2020-03-26_18_38_39_100000_atEntry_39_100000_afterSetup_39_200000_afterStartingGNU_39_400000_afterFinishingGNU_38_39_500000', True)
         self.blocks_file_source_0.set_begin_tag(pmt.PMT_NIL)
-        self.audio_sink_0_0 = audio.sink(48000, '', True)
-        self.audio_sink_0 = audio.sink(48000, '', True)
 
 
 
         ##################################################
         # Connections
         ##################################################
-        self.connect((self.blocks_file_source_0, 0), (self.low_pass_filter_0, 0))
-        self.connect((self.blocks_file_source_0_1, 0), (self.low_pass_filter_0_0, 0))
-        self.connect((self.blocks_multiply_const_vxx_0, 0), (self.audio_sink_0, 0))
-        self.connect((self.blocks_multiply_const_vxx_0_0, 0), (self.audio_sink_0_0, 0))
-        self.connect((self.low_pass_filter_0, 0), (self.rational_resampler_xxx_0, 0))
-        self.connect((self.low_pass_filter_0_0, 0), (self.rational_resampler_xxx_0_0, 0))
-        self.connect((self.rational_resampler_xxx_0, 0), (self.blocks_multiply_const_vxx_0, 0))
-        self.connect((self.rational_resampler_xxx_0_0, 0), (self.blocks_multiply_const_vxx_0_0, 0))
+        self.connect((self.blocks_file_source_0, 0), (self.blocks_throttle_0, 0))
+        self.connect((self.blocks_throttle_0, 0), (self.wxgui_fftsink2_0_0, 0))
+        self.connect((self.blocks_throttle_0, 0), (self.wxgui_waterfallsink2_0, 0))
 
     def get_samp_rate(self):
         return self.samp_rate
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.low_pass_filter_0_0.set_taps(firdes.low_pass(1, self.samp_rate, 750e3, 250e3, firdes.WIN_HAMMING, 6.76))
-        self.low_pass_filter_0.set_taps(firdes.low_pass(1, self.samp_rate, 750e3, 250e3, firdes.WIN_HAMMING, 6.76))
-
-    def get_channel_width(self):
-        return self.channel_width
-
-    def set_channel_width(self, channel_width):
-        self.channel_width = channel_width
-
-    def get_channel_freq(self):
-        return self.channel_freq
-
-    def set_channel_freq(self, channel_freq):
-        self.channel_freq = channel_freq
-
-    def get_center_freq(self):
-        return self.center_freq
-
-    def set_center_freq(self, center_freq):
-        self.center_freq = center_freq
+        self.wxgui_waterfallsink2_0.set_sample_rate(self.samp_rate)
+        self.wxgui_fftsink2_0_0.set_sample_rate(self.samp_rate)
+        self.blocks_throttle_0.set_sample_rate(self.samp_rate)
 
 
 def main(top_block_cls=top_block, options=None):
