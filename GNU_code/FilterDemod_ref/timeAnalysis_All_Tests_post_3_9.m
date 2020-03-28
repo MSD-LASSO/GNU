@@ -4,8 +4,8 @@ close all
 
 % mainPath='C:\Users\awian\Desktop\MSD\3_9_ref_only';
 % mainPath='C:\Users\awian\Desktop\MSD\3_12_ref_same_pi';
-mainPath='C:\Users\awian\Desktop\MSD\3_13_same_pi_APS';
-
+% mainPath='C:\Users\awian\Desktop\MSD\3_13_same_pi_APS';
+mainPath='C:\Users\awian\Desktop\MSD\hailMary';
 
 pi1_directory=dir([mainPath '\pi1_filtered']);
 pi2_directory=dir([mainPath '\pi2_filtered']);
@@ -24,18 +24,23 @@ for i = 3:length(pi1_directory)
     str=split(pi1_directory(i).name,'_');
     assumedMin=60*str2double(str{6});
     scheduledTime(i-2)=assumedMin+str2double(str{7})+str2double(str{8})/1e6;
-    file_save_time_1(i-2,1)=assumedMin+str2double(str{10})+str2double(str{11})/1e6;
-    file_save_time_1(i-2,2)=assumedMin+str2double(str{13})+str2double(str{14})/1e6;
-    file_save_time_1(i-2,3)=assumedMin+str2double(str{16})+str2double(str{17})/1e6;
-    file_save_time_1(i-2,4)=60*str2double(str{19})+str2double(str{20})+str2double(str{21}(1:end-4))/1e6;
+    
+    
+    
+    a=assumedMin+str2double(str{10})+str2double(str{11})/1e6;
+    b=assumedMin+str2double(str{13})+str2double(str{14})/1e6;
+    c=assumedMin+str2double(str{16})+str2double(str{17})/1e6;
+    d=60*str2double(str{19})+str2double(str{20})+str2double(str{21}(1:end-4))/1e6;
+    file_save_time_1(i-2,:)=[a,b,c,d];
+    
     
     str=split(pi2_directory(i).name,'_');
     assumedMin=60*str2double(str{6});
-    file_save_time_2(i-2,1)=assumedMin+str2double(str{10})+str2double(str{11})/1e6;
-    file_save_time_2(i-2,2)=assumedMin+str2double(str{13})+str2double(str{14})/1e6;
-    file_save_time_2(i-2,3)=assumedMin+str2double(str{16})+str2double(str{17})/1e6;
-    file_save_time_2(i-2,4)=60*str2double(str{19})+str2double(str{20})+str2double(str{21}(1:end-4))/1e6;
-    
+    a=assumedMin+str2double(str{10})+str2double(str{11})/1e6;
+    b=assumedMin+str2double(str{13})+str2double(str{14})/1e6;
+    c=assumedMin+str2double(str{16})+str2double(str{17})/1e6;
+    d=60*str2double(str{19})+str2double(str{20})+str2double(str{21}(1:end-4))/1e6;
+    file_save_time_2(i-2,:)=[a,b,c,d];
     
 %     n=length('Scheduled');
 %     index=strfind(pi1_directory(i).name,'Scheduled')+n;
@@ -63,30 +68,36 @@ for i = 3:length(pi1_directory)
 %     file_save_time_2(i-2,4)=60*str2double(pi2_directory(i).name(index+1:index+2))+str2double(pi2_directory(i).name(index+4:index+4))+str2double(pi2_directory(i).name(index+6:index+11))/1e6;
 %     
 %     
-    
+    intersect=pi_1_file(strfind(pi_1_file,'2020'):strfind(pi_1_file,'2020')+25);
 %     file_save_time_1(i-2) = 60*str2double(replace(extractBetween(pi1_directory(i).name, 54, 55), '_', '.')) + str2double(replace(extractBetween(pi1_directory(i).name, 57, 65), '_', '.'));
 %     file_save_time_2(i-2) = 60*str2double(replace(extractBetween(pi2_directory(i).name, 54, 55), '_', '.')) + str2double(replace(extractBetween(pi2_directory(i).name, 57, 65), '_', '.'));
     delta_file(i-2,:) = file_save_time_1(i-2,:) - file_save_time_2(i-2,:);
     [x1, Fs1, N1] = readIQ(pi_1_file);
     [x2, Fs2, N2] = readIQ(pi_2_file);
-    [sample_delay(i-2), ~, ~, ~, ~] = abs_xcov_IQ(pi_1_file, pi_2_file, 0);
+    [sample_delay(i-2), ~, ~, ~, ~] = abs_xcov_IQ(pi_1_file, pi_2_file, 0, intersect);
     time_delay(i-2) = sample_delay(i-2) /Fs1;
     offset(i-2,:) = -1 * time_delay(i-2) -  delta_file(i-2,:);
     t = 0:1/Fs1:(N1-1)/Fs1;
-%     figure()
-%     plot(t, x1+1, t, x2-1)
-%     legend('First Pi', 'Second Pi')
-%     xlabel('Time [s]')
-%     ylabel('Signals with offsets')
-%     ylim([-2.5 2.5]);
+    figure()
+    plot(t, x1+1, t, x2-1)
+    legend('First Pi', 'Second Pi')
+    xlabel('Time [s]')
+    ylabel('Signals with offsets')
+    ylim([-2.5 2.5]);
+    title(intersect)
+    
+    clear x1
+    clear x2
+    clear t
+    
 end
 
 % plot_fft_IQ(pi_1_file_1);
 % plot_fft_IQ(pi_2_file_1);
 
-clear x1
-clear x2
-clear t
+% clear x1
+% clear x2
+% clear t
 
 
 % plot((file_save_time_1+file_save_time_2)/2 - (file_save_time_1(1)+file_save_time_2(1))/2, offset)
@@ -98,6 +109,10 @@ offset=[time_delay offset];
 m=mean(abs(offset));
 s=std(abs(offset));
 disp(mean(abs(offset))); disp(std(abs(offset)))
+
+GraphSaver({'png'},'Plots',0,0);
+close all
+
 save('3_13_ref_same_pi_APS_extended.mat');
 
 
