@@ -140,7 +140,7 @@
     </param>
     <param>
       <key>file</key>
-      <value>C:\Users\devri\Documents\RIT\Sixth Semester\MSD I\GIT\GNU_non_git\hailmary_LUSAT\pi2\Sat_Time_Scheduled_2020-03-26_18_38_39_100000_atEntry_39_100000_afterSetup_39_200000_afterStartingGNU_39_400000_afterFinishingGNU_38_39_500000</value>
+      <value>C:\Users\devri\Documents\RIT\Sixth Semester\MSD I\GIT\GNU_non_git\hailmary_LUSAT\pi1\Sat_Time_Scheduled_2020-03-26_18_38_39_100000_atEntry_39_213275_afterSetup_38_600000_afterStartingGNU_38_700000_afterFinishingGNU_39_9_402687</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -191,7 +191,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -242,7 +242,7 @@
     </param>
     <param>
       <key>baseband_freq</key>
-      <value>0</value>
+      <value>437.125e6</value>
     </param>
     <param>
       <key>alias</key>
@@ -345,7 +345,7 @@
     </param>
     <param>
       <key>baseband_freq</key>
-      <value>0</value>
+      <value>437.125e6</value>
     </param>
     <param>
       <key>alias</key>
@@ -365,7 +365,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>0</value>
     </param>
     <param>
       <key>fft_rate</key>

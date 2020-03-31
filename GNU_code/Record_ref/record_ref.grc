@@ -1883,7 +1883,7 @@
     </param>
     <param>
       <key>args</key>
-      <value>hackrf=hackrf_index,bias=1</value>
+      <value>hackrf=0,bias=1</value>
     </param>
     <param>
       <key>_enabled</key>
