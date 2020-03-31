@@ -187,7 +187,7 @@ def argument_parser():
     parser = OptionParser(usage="%prog: [options]")
 
     parser.add_option(
-        "", "--schedulerFile", dest="schedulerFile", type="String", default="InputTimes.txt",
+        "", "--schedulerFile", dest="schedulerFile", type="string", default="InputTimes.txt",
         help="Set the text file name to read the schedule from. IMPORTANT: Cannot have extra white space at end of "
              "InputTimes.txt. It will throw index out of range error [default=%default]")
 
@@ -200,7 +200,7 @@ def argument_parser():
         help="Set Set Hackrf to listen to. Only use if 2 hackrfs are plugged into same device. [default=%default]")
 
     parser.add_option(
-        "", "--fileDirectory", dest="fileDirectory", type="String", default='/home/pi/Documents/',
+        "", "--fileDirectory", dest="fileDirectory", type="string", default='/home/pi/Documents/',
         help="Set path that files will be saved to. [default=%default]")
 
 def main(options=None):
