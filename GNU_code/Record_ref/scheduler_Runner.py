@@ -1,9 +1,12 @@
+import time
+import record_ref
+from datetime import datetime, date
 import os
 from optparse import OptionParser
 import unified
 import gps_free_APScheduler
 
-def record(center_frequency,channel_frequency,currentTime,sampleRate,sampleLength,fileDirectory,debuggerFile,hackrf_index,GPShandler=None):
+def record(schedDate, center_frequency,channel_frequency,currentTime,sampleRate,sampleLength,fileDirectory,debuggerFile,hackrf_index,GPShandler=None):
     # center_frequency and channel_frequency are both given in mHz.
 
     # Decide whether we are recording a satellite or reference signal.
@@ -46,7 +49,7 @@ def record(center_frequency,channel_frequency,currentTime,sampleRate,sampleLengt
         int(round(channel_frequency * 1e6))) + ' --samp-rate=' + str(
         sampleRate) + '--hackrf_index='+ str(hackrf_index) +' --center-freq='+str(
         int(round(center_frequency * 1e6)))+' --num-samples=' + str(
-        int(round(Length[i] * sampleRate))) + ' --file-loc="'+fileDirectory + ID_tag + '_Time' + str(
+        int(round(sampleLength * sampleRate))) + ' --file-loc="'+fileDirectory + ID_tag + '_Time' + str(
         currentTime).replace(" ","_").replace(":", "_").replace(".", "_") + '"'
 
 
@@ -89,7 +92,7 @@ def record(center_frequency,channel_frequency,currentTime,sampleRate,sampleLengt
             else:
                 prefix = "Ref_"
 
-            scheduled = str(Date[i]).replace(" ", "_").replace(":", "_").replace(".", "_")
+            scheduled = str(schedDate).replace(" ", "_").replace(":", "_").replace(".", "_")
             actuallyRanAt = "%s_%s" % (currentTime.second, str(currentTime.microsecond))
             afterSetupStr = "%s_%s" % (afterSetup.second, str(afterSetup.microsecond))
             afterStartingGNUStr = "%s_%s" % (afterStartingGNU.second, str(afterStartingGNU.microsecond))
@@ -211,12 +214,13 @@ def main(options=None):
         options, _ = argument_parser().parse_args()
 
     if options.scheduler==0:
-        unified(options.schedulerFile,options.hackrf_index,options.fileDirectory)
+        from unified import schedule
     elif options.scheduler==1:
-        gps_free_APScheduler(options.schedulerFile,options.hackrf_index,options.fileDirectory)
+        from gps_free_APScheduler import schedule
     else:
         raise ImportError("Unknown scheduler variable given.")
 
+    schedule(options.schedulerFile, options.hackrf_index, options.fileDirectory)
 
 if __name__ == '__main__':
     main()

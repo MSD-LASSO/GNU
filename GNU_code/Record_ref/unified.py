@@ -139,7 +139,7 @@ def schedule(fileName,hackrf_index,fileDirectory):
             # print('Before Function Call: '+str(String))
 
             ######################### Start Function Call #########################
-            record(center_frequency=Doppler[i]-0.5,channel_frequency=Doppler[i],currentTime=currentTime,
+            record(schedDate=Date[i],center_frequency=Doppler[i]-0.5,channel_frequency=Doppler[i],currentTime=currentTime,
                    sampleRate=sampleRate,sampleLength=Length[i],fileDirectory=fileDirectory,debuggerFile=debuggerFile,
                    hackrf_index=hackrf_index,GPShandler=x)
             # fileDirectory='/home/pi/Documents/'
