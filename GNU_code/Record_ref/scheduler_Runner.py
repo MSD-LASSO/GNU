@@ -192,11 +192,11 @@ def argument_parser():
              "InputTimes.txt. It will throw index out of range error [default=%default]")
 
     parser.add_option(
-        "", "--scheduler", dest="scheduler", type="intx", default=0,
+        "", "--scheduler", dest="scheduler", type="int", default=0,
         help="Set to 0 to use unified.py and 1 to use gps_free_APScheduler.py [default=%default]")
 
     parser.add_option(
-        "", "--hackrf-index", dest="hackrf_index", type="intx", default=0,
+        "", "--hackrf-index", dest="hackrf_index", type="int", default=0,
         help="Set Set Hackrf to listen to. Only use if 2 hackrfs are plugged into same device. [default=%default]")
 
     parser.add_option(
