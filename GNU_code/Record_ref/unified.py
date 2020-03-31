@@ -118,7 +118,7 @@ def schedule(fileName,hackrf_index,fileDirectory):
         if currentTime>=Date[i]:
             i=i+1
         else:
-            foundAtLeastOne=1
+            fountAtLeastOne=1
             break
 
     if fountAtLeastOne==0:
