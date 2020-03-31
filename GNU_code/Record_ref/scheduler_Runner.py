@@ -203,6 +203,9 @@ def argument_parser():
         "", "--fileDirectory", dest="fileDirectory", type="string", default='/home/pi/Documents/',
         help="Set path that files will be saved to. [default=%default]")
 
+    return parser
+
+
 def main(options=None):
     if options is None:
         options, _ = argument_parser().parse_args()
