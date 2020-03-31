@@ -37,7 +37,7 @@ class record_ref(gr.top_block):
         ##################################################
         # Blocks
         ##################################################
-        self.osmosdr_source_0 = osmosdr.source( args="numchan=" + str(1) + " " + 'hackrf=hackrf_index,bias=1' )
+        self.osmosdr_source_0 = osmosdr.source( args="numchan=" + str(1) + " " + 'hackrf=0,bias=1' )
         self.osmosdr_source_0.set_clock_source('external', 0)
         self.osmosdr_source_0.set_time_source('external', 0)
         self.osmosdr_source_0.set_time_now(osmosdr.time_spec_t(time.time()), osmosdr.ALL_MBOARDS)
