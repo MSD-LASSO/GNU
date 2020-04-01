@@ -116,7 +116,7 @@ if __name__ == '__main__':
     print("This script will throw an Assertion Error if there's a problem with the system.")
     print("This script WILL take ~10 minutes to run with intermediate progress reports.")
     print("This script WILL OVERWRITE the following: InputTimes.txt")
-    # basicTest()
+    basicTest()
     print("Basic Test completed. 75% complete. Starting next Test...")
     allScheduledTimesAlreadyHappenedTest()
     print("Scheduled Times already happened test completed. 87.5% complete. Starting next Test...")
