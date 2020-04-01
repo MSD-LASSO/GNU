@@ -64,6 +64,9 @@ def runTest(fileDirectory,scheduler,hackrf_index,schedulerFile):
     #                st_atime=1584299303, st_mtime=1584299400, st_ctime=1584299400)
 
     # Clean up.
+    for currentFile in files:
+        os.remove(fileDirectory+currentFile)
+
     if deleteDirectories==1:
         os.rmdir(fileDirectory)
 
