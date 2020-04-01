@@ -65,7 +65,7 @@ def runTest(fileDirectory,scheduler,hackrf_index,schedulerFile):
 
     # Clean up.
     if deleteDirectories==1:
-        os.remove(fileDirectory)
+        os.rmdir(fileDirectory)
 
 
 
