@@ -7,10 +7,27 @@ from CreateTimes import createText
 # Using this Test script. See the below output.
 
 def allScheduledTimesAlreadyHappenedTest():
-    None
+    fileDirectory = "/home/pi/Documents/" + str(time.time()).replace(".", "_") + "/"
 
-def noHackrfPluggedInTest():
-    None
+    scheduler = 0
+    hackrf_index = 0
+    schedulerFile = "InputTimes.txt"
+
+    numEntries = 4  # for create schedule.
+    currentTime = datetime.now()
+    # Translation of the createText
+    # Begin schedule 1 minute from now.
+    # Delay 1 second between sampling intervals.
+    # Create 4 recording times
+    # Do not oscillate between recording a satellite and a reference signal
+    # Record for 5 seconds
+    shiftedTime = currentTime + timeshifter.timedelta(minutes=-10)
+    createText(str(shiftedTime.date()) + 'T' + str(shiftedTime.time()), 1, numEntries, 0, 5)
+
+    numEntriesToExpect=1 # Only the debugger file.
+    expectedLine="Import Error: All scheduled times are in the past!"
+    runTest(fileDirectory, scheduler, hackrf_index, schedulerFile,numEntriesToExpect,expectedLine)
+
 
 def basicTest():
     fileDirectory="/home/pi/Documents/"+str(time.time()).replace(".","_")+"/"
@@ -18,13 +35,6 @@ def basicTest():
     scheduler=0
     hackrf_index=0
     schedulerFile="InputTimes.txt"
-    runTest(fileDirectory,scheduler,hackrf_index,schedulerFile)
-
-
-def runTest(fileDirectory,scheduler,hackrf_index,schedulerFile):
-
-    if fileDirectory is "/home/pi/Documents/":
-        raise ImportError("Cannot Test using the Documents/ Directory. Make a subdirectory.")
 
     numEntries=4 #for create schedule.
     currentTime=datetime.now()
@@ -36,6 +46,16 @@ def runTest(fileDirectory,scheduler,hackrf_index,schedulerFile):
     # Record for 5 seconds
     shiftedTime=currentTime+timeshifter.timedelta(minutes=1)
     createText(str(shiftedTime.date())+'T'+str(shiftedTime.time()),1,numEntries,0,5)
+
+    numEntriesToExpect= numEntries * 2 + 1
+    expectedLine="All scheduled Times Completed."
+    runTest(fileDirectory,scheduler,hackrf_index,schedulerFile,numEntriesToExpect,expectedLine)
+
+
+def runTest(fileDirectory,scheduler,hackrf_index,schedulerFile, numEntriesToExpect, expectedLineInDebugger):
+
+    if fileDirectory is "/home/pi/Documents/":
+        raise ImportError("Cannot Test using the Documents/ Directory. Make a subdirectory.")
 
     # Run the scheduler with the specified inputs
     strCmd="python /home/pi/GIT_GNU/GNU/GNU_code/Record_ref/scheduler_Runner.py --fileDirectory='"+fileDirectory+"' --scheduler="+str(scheduler)+" --hackrf-index="+str(hackrf_index)+" --schedulerFile="+str(schedulerFile)
@@ -52,8 +72,9 @@ def runTest(fileDirectory,scheduler,hackrf_index,schedulerFile):
 
     print("Checking Number of Files")
     # Data file and header file for each numEntries and the debugger.
-    assert files.__len__() == numEntries*2+1
+    assert files.__len__() == numEntriesToExpect
     print("Number of files is correct.")
+
 
     print("Checking File Sizes")
     for currentFile in files:
@@ -62,6 +83,14 @@ def runTest(fileDirectory,scheduler,hackrf_index,schedulerFile):
             print(fileDirectory+currentFile)
             print(os.stat(fileDirectory+currentFile).st_size)
             assert os.stat(fileDirectory+currentFile).st_size==80e6
+        if currentFile.__contains__("Debugger")==1:
+            print("Checking Debugger for required String")
+            with open(fileDirectory+currentFile, "r") as debuggerfile:
+                data = debuggerfile.readlines()
+            assert data.__contains__(expectedLineInDebugger)
+            print("String found!")
+
+
     print("All file sizes are correct")
     # os.stat_result(st_mode=33188, st_ino=6419862, st_dev=16777220, st_nlink=1, st_uid=501, st_gid=20, st_size=1564,
     #                st_atime=1584299303, st_mtime=1584299400, st_ctime=1584299400)

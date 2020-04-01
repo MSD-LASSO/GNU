@@ -82,7 +82,7 @@ def schedule(fileName,hackrf_index,fileDirectory):
             break
 
     if fountAtLeastOne==0:
-        debuggerFile.write("All scheduled times are in the past! Check the dates carefully. If the dates are correct,"
+        debuggerFile.write("Import Error: All scheduled times are in the past! Check the dates carefully. If the dates are correct,"
                           "check the internal computer clock. Perhaps it is out of sync.")
         raise ImportError("All scheduled times are in the past! Check the dates carefully. If the dates are correct,"
                           "check the internal computer clock. Perhaps it is out of sync.")
