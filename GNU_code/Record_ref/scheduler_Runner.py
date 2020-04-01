@@ -124,21 +124,24 @@ def getCurrentTime(GPShandler,debuggerFile):
     #Get the current time to the best of our ability.
     if (status==0):
         GPS=True
-        # # 2020-3-1
-        # # 20:17:2.5
+        # What the output from L76X looks like
+        # 2020-3-1
+        # 20:17:2.5
+
         Str=GPShandler.Date+'T'+GPShandler.Time
+
+        # Debugging tools.
+        # Str='2020-3-1'+'T'+'20:17:2.5'
         # print(Str)
-        # # Str='2020-3-1'+'T'+'20:17:2.5'
         try:
             currentTime = datetime.strptime(Str, "%Y-%m-%dT%H:%M:%S.%f")
         except:
+            # Sometimes the L76X.get will work but Str will be empty. So we have this try catch here.
             GPS = False
             currentTime = datetime.now()
-        # GPS=False
-        # currentTime=datetime.now()
 
     else:
-        # print('No positioning')
+        # print('No positioning') #Debugging tool.
         GPS=False
         currentTime=datetime.now()
 
