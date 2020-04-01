@@ -71,7 +71,7 @@ def runTest(fileDirectory,scheduler,hackrf_index,schedulerFile):
 
 if __name__ == '__main__':
 
-    deleteDirectories=0 #Set to 0 to keep data and directories created by this script.
+    deleteDirectories=1 #Set to 0 to keep data and directories created by this script.
 
     print("Use of this test script is as follows:")
     print("Make sure the system is fully connected. Antenna, Hackrf, LNA, GPS are all connected to the Raspberry Pi")
