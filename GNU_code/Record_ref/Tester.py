@@ -1,5 +1,6 @@
 import os
 from datetime import datetime
+import time
 import datetime as timeshifter
 from CreateTimes import createText
 
@@ -12,7 +13,8 @@ def noHackrfPluggedInTest():
     None
 
 def basicTest():
-    fileDirectory="/home/pi/Documents/basicTest/"
+    fileDirectory="/home/pi/Documents/"+str(time.time()).replace(".","_")+"/"
+
     scheduler=0
     hackrf_index=0
     schedulerFile="InputTimes.txt"
@@ -48,7 +50,8 @@ def runTest(fileDirectory,scheduler,hackrf_index,schedulerFile):
         files.extend(filenames)
         break
 
-    assert files.__len__() == numEntries
+    # Data file and header file for each numEntries and the debugger.
+    assert files.__len__() == numEntries*2+1
 
     for currentFile in files:
         # Check file sizes for data sets. Ignore header files.
@@ -73,7 +76,7 @@ if __name__ == '__main__':
     print("Run this script using python Tester.py in its folder or by specfiying the absolute path")
     print("This script will throw an Assertion Error if there's a problem with the system.")
     print("This script WILL take ~10 minutes to run with intermediate progress reports.")
-    print("This script WILL OVERWRITE the following: InputTimes.txt, /home/pi/Documents/basicTest/, /home/pi/Documents/Erred")
+    print("This script WILL OVERWRITE the following: InputTimes.txt")
     basicTest()
     allScheduledTimesAlreadyHappenedTest()
     noHackrfPluggedInTest()
