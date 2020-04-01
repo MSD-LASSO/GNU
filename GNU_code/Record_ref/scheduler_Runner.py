@@ -170,8 +170,8 @@ def argument_parser():
         help="Set Set Hackrf to listen to. Only use if 2 hackrfs are plugged into same device. [default=%default]")
 
     parser.add_option(
-        "", "--fileDirectory", dest="fileDirectory", type="string", default='"/home/pi/Documents/"',
-        help="Set path that files will be saved to. [default=%default]")
+        "", "--fileDirectory", dest="fileDirectory", type="string", default='/home/pi/Documents/',
+        help="Set path that files will be saved to. Must be in Quotes. [default=%default]")
 
     return parser
 
