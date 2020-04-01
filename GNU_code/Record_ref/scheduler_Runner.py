@@ -5,6 +5,9 @@ from optparse import OptionParser
 import os
 from os import mkdir
 
+# Run this script when you want to record signals at set times. Use python scheduler_Runner --help to learn more about
+# the inputs to the function.
+
 def record(schedDate, center_frequency,channel_frequency,currentTime,sampleRate,sampleLength,fileDirectory,debuggerFile,hackrf_index,GPShandler=None):
     # center_frequency and channel_frequency are both given in mHz.
 

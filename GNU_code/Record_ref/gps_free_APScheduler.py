@@ -6,7 +6,9 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from scheduler_Runner import record
 
 
-
+# This uses the Python Package APScheduler. We do not recommend it because we haven't gotten it to work completely. It
+# does not work with the GPS (since the only way to get the time right now is to do L75X.get()). If the GPS becomes an
+# NTP clock AND we figure out BackgroundScheduler, then this method will be superior to unified.py.
 def my_job(schedDate, center_frequency, channel_frequency, sampleRate, sampleLength, fileDirectory,
            debuggerFile, hackrf_index):
     ######################### Start Function Call #########################
