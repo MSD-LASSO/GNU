@@ -1,10 +1,9 @@
 import time
 import record_ref
 from datetime import datetime, date
-import os
 from optparse import OptionParser
-# import unified
-import gps_free_APScheduler
+import os
+from os import mkdir
 
 def record(schedDate, center_frequency,channel_frequency,currentTime,sampleRate,sampleLength,fileDirectory,debuggerFile,hackrf_index,GPShandler=None):
     # center_frequency and channel_frequency are both given in mHz.
@@ -179,6 +178,9 @@ def argument_parser():
 def main(options=None):
     if options is None:
         options, _ = argument_parser().parse_args()
+
+    if os.path.exists(options.fileDirectory) == 0:
+        mkdir(options.fileDirectory)
 
     print('PLEASE VERIFY THE FOLLOWING: ')
     print('The hackrf is plugged into this device AND an antenna is PLUGGED into the hackrf')
