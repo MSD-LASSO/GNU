@@ -86,7 +86,7 @@ def runTest(fileDirectory,scheduler,hackrf_index,schedulerFile, numEntriesToExpe
         if currentFile.__contains__("Debugger")==1:
             print("Checking Debugger for required String")
             with open(fileDirectory+currentFile, "r") as debuggerfile:
-                data = debuggerfile.readlines()
+                data = debuggerfile.read()
             assert data.__contains__(expectedLineInDebugger)
             print("String found!")
 
