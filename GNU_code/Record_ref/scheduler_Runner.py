@@ -170,7 +170,7 @@ def argument_parser():
         help="Set Set Hackrf to listen to. Only use if 2 hackrfs are plugged into same device. [default=%default]")
 
     parser.add_option(
-        "", "--fileDirectory", dest="fileDirectory", type="string", default='/home/pi/Documents/',
+        "", "--fileDirectory", dest="fileDirectory", type="string", default='"/home/pi/Documents/"',
         help="Set path that files will be saved to. [default=%default]")
 
     return parser
@@ -186,7 +186,7 @@ def main(options=None):
     print('The GPS Hat is securely attached to the Pi and the GPS antenna is connected.')
     print('Sleeping for 10 seconds')
     time.sleep(10)
-    
+
     if options.scheduler==0:
         from unified import schedule
     elif options.scheduler==1:
