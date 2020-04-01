@@ -55,7 +55,7 @@ def runTest(fileDirectory,scheduler,hackrf_index,schedulerFile):
 
     for currentFile in files:
         # Check file sizes for data sets. Ignore header files.
-        if currentFile.__contains__(".hdr")==0:
+        if currentFile.__contains__(".hdr")==0 and currentFile.__contains__("debugger")==0:
             assert os.stat(fileDirectory+currentFile).st_size==80e6
 
     # os.stat_result(st_mode=33188, st_ino=6419862, st_dev=16777220, st_nlink=1, st_uid=501, st_gid=20, st_size=1564,
