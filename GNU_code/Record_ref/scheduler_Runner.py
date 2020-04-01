@@ -111,40 +111,6 @@ def record(schedDate, center_frequency,channel_frequency,currentTime,sampleRate,
 
 
 
-
-    # tb = top.record_ref(center_freq=97000000, channel_freq=97900000,
-    #                     file_loc=fileDirectory + 'Ref_Time' + str(currentTime).replace(" ", "_").replace(":",
-    #                                                                                                      "_").replace(
-    #                         ".", "_"), num_samples=int(round(Length[i] * sampleRate)),
-    #                     samp_rate=sampleRate)
-    # # afterSetup=datetime.now()
-    # afterSetup, GPS, GPShandler = getCurrentTime(GPShandler, debuggerFile)
-    # print("After calling class constructor: " + str(afterSetup))
-    # debuggerFile.write("After calling class constructor: " + str(afterSetup) + '\n')
-    #
-    # tb.start()
-    # # afterStartingGNU=datetime.now()
-    # afterStartingGNU, GPS, GPShandler = getCurrentTime(GPShandler, debuggerFile)
-    # print("After calling tb.start(): " + str(afterStartingGNU))
-    # debuggerFile.write("After calling tb.start(): " + str(afterStartingGNU) + '\n')
-    #
-    # tb.wait()
-    # # Use this along with fg.close for timing tests WITHOUT GNU radio.
-    # # fg=open('/home/pi/Documents/Ref_Time' + str(currentTime).replace(" ", "_").replace(":", "_").replace(".", "_"),'w+')
-    # # afterFinishingGNU=datetime.now()
-    # afterFinishingGNU, GPS, GPShandler = getCurrentTime(GPShandler, debuggerFile)
-    # print("After calling tb.wait(): " + str(afterFinishingGNU))
-    # debuggerFile.write("After calling tb.wait(): " + str(afterFinishingGNU) + '\n')
-    #
-    # del tb
-    # # fg.close()
-    #
-    # String = 'python /home/pi/GIT_GNU/GNU/GNU_code/Record_ref/record_ref.py --channel-freq=' + '97900000' + ' --samp-rate=' + str(
-    #     sampleRate) + ' --center-freq=97000000 --num-samples=' + str(
-    #     int(round(Length[i] * sampleRate))) + ' --file-loc="/home/pi/Documents/Ref_Time' + str(
-    #     currentTime).replace(" ", "_").replace(":", "_").replace(".", "_") + '"'
-    #
-    #
 def getCurrentTime(GPShandler,debuggerFile):
     try:
         GPShandler.L76X_Get()
@@ -196,7 +162,8 @@ def argument_parser():
 
     parser.add_option(
         "", "--scheduler", dest="scheduler", type="int", default=0,
-        help="Set to 0 to use unified.py and 1 to use gps_free_APScheduler.py [default=%default]")
+        help="Set to 0 to use unified.py and 1 to use gps_free_APScheduler.py. NOTE: we could only get the BlockingScheduler"
+             "to work for APScheduler. The DebuggerFile WILL be empty for this file. [default=%default]")
 
     parser.add_option(
         "", "--hackrf-index", dest="hackrf_index", type="int", default=0,
@@ -213,6 +180,13 @@ def main(options=None):
     if options is None:
         options, _ = argument_parser().parse_args()
 
+    print('PLEASE VERIFY THE FOLLOWING: ')
+    print('The hackrf is plugged into this device AND an antenna is PLUGGED into the hackrf')
+    print('The LNA is connected correctly, its little light should face the hackrf')
+    print('The GPS Hat is securely attached to the Pi and the GPS antenna is connected.')
+    print('Sleeping for 10 seconds')
+    time.sleep(10)
+    
     if options.scheduler==0:
         from unified import schedule
     elif options.scheduler==1:
