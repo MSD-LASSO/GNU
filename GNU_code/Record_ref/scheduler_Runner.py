@@ -157,7 +157,8 @@ def argument_parser():
     parser.add_option(
         "", "--schedulerFile", dest="schedulerFile", type="string", default="InputTimes.txt",
         help="Set the text file name to read the schedule from. IMPORTANT: Cannot have extra white space at end of "
-             "InputTimes.txt. It will throw index out of range error [default=%default]")
+             "InputTimes.txt. It will throw index out of range error. Times must be in SEQUENTIAL ORDER! "
+             "[default=%default]")
 
     parser.add_option(
         "", "--scheduler", dest="scheduler", type="int", default=0,
@@ -186,6 +187,9 @@ def main(options=None):
     print('The hackrf is plugged into this device AND an antenna is PLUGGED into the hackrf')
     print('The LNA is connected correctly, its little light should face the hackrf')
     print('The GPS Hat is securely attached to the Pi and the GPS antenna is connected.')
+    if options.scheduler==1:
+        print('WARNING: You have selected the APScheduler. The current implementation uses a BlockingScheduler. YOU WILL NOT BE '
+              'ABLE TO USE THIS TERMINAL even after the program ends. You will have to close and reopen it.')
     print('Sleeping for 10 seconds')
     time.sleep(10)
 

@@ -1,144 +1,27 @@
 from datetime import datetime, date, time
-# import datetime as
 import time
-import record_ref
 from apscheduler.schedulers.blocking import BlockingScheduler
 from apscheduler.schedulers.background import BackgroundScheduler
-import os
-from scheduler_Runner import getCurrentTime
+# We can't get the backgroundScheduler to work. :(
 from scheduler_Runner import record
 
 
 
-# def my_job(Date,Doppler,Length,debuggerFile):
 def my_job(schedDate, center_frequency, channel_frequency, sampleRate, sampleLength, fileDirectory,
            debuggerFile, hackrf_index):
     ######################### Start Function Call #########################
     currentTime=datetime.now()
     record(schedDate, center_frequency, channel_frequency, currentTime, sampleRate, sampleLength, fileDirectory,
            debuggerFile, hackrf_index, GPShandler=None)
-    #
-    #
-    # fileDirectory = '/home/pi/Documents/3_13_same_pi_APS/pi1/'
-    # if Doppler > 0:
-    #     top = record_ref
-    #     tb = top.record_ref(center_freq=437000000, channel_freq=int(round(Doppler * 1e6)),
-    #                                       file_loc=fileDirectory + 'Sat_Time' + str(currentTime).replace(" ",
-    #                                                                                                      "_").replace(
-    #                                           ":", "_").replace(".", "_"),
-    #                                       num_samples=int(round(Length * sampleRate)),
-    #                                       samp_rate=sampleRate)
-    #     afterSetup = datetime.now()
-    #     print("After calling class constructor: " + str(afterSetup))
-    #     debuggerFile.write("After calling class constructor: " + str(afterSetup) + '\n')
-    #     tb.start()
-    #     afterStartingGNU = datetime.now()
-    #     print("After calling tb.start(): " + str(afterStartingGNU))
-    #     debuggerFile.write("After calling tb.start(): " + str(afterStartingGNU) + '\n')
-    #     tb.wait()
-    #     afterFinishingGNU = datetime.now()
-    #     print("After calling tb.wait(): " + str(afterFinishingGNU))
-    #     debuggerFile.write("After calling tb.wait(): " + str(afterFinishingGNU) + '\n')
-    #     del tb
-    #     String = 'python /home/pi/GIT_GNU/GNU/GNU_code/Record_ref/record_ref.py --channel-freq=' + str(
-    #         int(round(Doppler * 1e6))) + ' --samp-rate=' + str(
-    #         sampleRate) + ' --center-freq=437000000 --num-samples=' + str(
-    #         int(round(Length * sampleRate))) + ' --file-loc="/home/pi/Documents/Sat_Time' + str(currentTime).replace(
-    #         " ", "_").replace(":", "_").replace(".", "_") + '"'
-    # else:
-    #
-    #     top = record_ref
-    #     tb = top.record_ref(center_freq=97000000, channel_freq=97900000,
-    #                                       file_loc=fileDirectory + '/Ref_Time' + str(currentTime).replace(" ",
-    #                                                                                                       "_").replace(
-    #                                           ":", "_").replace(".", "_"),
-    #                                       num_samples=int(round(Length * sampleRate)),
-    #                                       samp_rate=sampleRate)
-    #     afterSetup = datetime.now()
-    #     print("After calling class constructor: " + str(afterSetup))
-    #     debuggerFile.write("After calling class constructor: " + str(afterSetup) + '\n')
-    #
-    #     tb.start()
-    #     afterStartingGNU = datetime.now()
-    #     print("After calling tb.start(): " + str(afterStartingGNU))
-    #     debuggerFile.write("After calling tb.start(): " + str(afterStartingGNU) + '\n')
-    #
-    #     tb.wait()
-    #     # Use this along with fg.close for timing tests WITHOUT GNU radio.
-    #     # fg=open('/home/pi/Documents/Ref_Time' + str(currentTime).replace(" ", "_").replace(":", "_").replace(".", "_"),'w+')
-    #     afterFinishingGNU = datetime.now()
-    #     print("After calling tb.wait(): " + str(afterFinishingGNU))
-    #     debuggerFile.write("After calling tb.wait(): " + str(afterFinishingGNU) + '\n')
-    #
-    #     del tb
-    #     # fg.close()
-    #
-    #     String = 'python /home/pi/GIT_GNU/GNU/GNU_code/Record_ref/record_ref.py --channel-freq=' + '97900000' + ' --samp-rate=' + str(
-    #         sampleRate) + ' --center-freq=97000000 --num-samples=' + str(
-    #         int(round(Length * sampleRate))) + ' --file-loc="/home/pi/Documents/Ref_Time' + str(
-    #         currentTime).replace(" ", "_").replace(":", "_").replace(".", "_") + '"'
-    #
-    # # time.sleep(10)
-    # # String="date >> /home/pi/Documents/debugger.txt 2>&1"
-    # # String="date >> /home/pi/Documents/TimingTest.txt 2>&1"
-    # # print(Doppler)
-    # # print(String)
-    # # os.system("sudo echo "+String+" >> /home/pi/Documents/debugger.txt 2>&1")
-    # debuggerFile.write("Completed hackRF call. Time: " + str(datetime.now()) + '\n')
-    # debuggerFile.write("HackRf String Call: " + '\n')
-    # debuggerFile.write(String + '\n')
-    # print("Completed hackRF call. Time: " + str(datetime.now()))
-    # print("HackRf String Call: ")
-    # print(String)
-    #
-    # # Goal now is to find the data file we just created and rename it.
-    # queryString = str(currentTime).replace(" ", "_").replace(":", "_").replace(".", "_")
-    # print("Queried: "+queryString)
-    # files = []
-    # for (dirpath, dirnames, filenames) in os.walk(fileDirectory):
-    #     files.extend(filenames)
-    #     break
-    #
-    # print(files)
-    # for currentFile in files:
-    #     if currentFile.__contains__(queryString):
-    #         # Now we rename the file
-    #         # Time_Scheduled_2020-MM-DD_HH_mm_SS_ffffff_atEntry_SS_fffffff_afterSetup_SS_ffffff_afterStartingGNU_SS_ffffff_afterFinishingGNU_mm_SS_ffffff
-    #         if currentFile.__contains__("."):
-    #             extension = ".hdr"
-    #         else:
-    #             extension = ''
-    #
-    #         if currentFile.__contains__("Sat"):
-    #             prefix = "Sat_"
-    #         else:
-    #             prefix = "Ref_"
-    #
-    #         scheduled = str(Date).replace(" ", "_").replace(":", "_").replace(".", "_")
-    #         actuallyRanAt = "%s_%s" % (currentTime.second, str(currentTime.microsecond))
-    #         afterSetupStr = "%s_%s" % (afterSetup.second, str(afterSetup.microsecond))
-    #         afterStartingGNUStr = "%s_%s" % (afterStartingGNU.second, str(afterStartingGNU.microsecond))
-    #         afterFinishingGNUStr = "%s_%s_%s" % (
-    #         afterFinishingGNU.minute, afterFinishingGNU.second, str(afterFinishingGNU.microsecond))
-    #
-    #         # print("FileName: ")
-    #         print(fileDirectory+
-    #                   prefix+"Time_Scheduled_"+scheduled+"_atEntry_"+actuallyRanAt+"_afterSetup_"+afterSetupStr+
-    #                   "_afterStartingGNU_"+afterStartingGNUStr+"_afterFinishingGNU_"+afterFinishingGNUStr+extension)
-    #
-    #         os.rename(r'' + fileDirectory + currentFile, r'' + fileDirectory +
-    #                   prefix + "Time_Scheduled_" + scheduled + "_atEntry_" + actuallyRanAt + "_afterSetup_" + afterSetupStr +
-    #                   "_afterStartingGNU_" + afterStartingGNUStr + "_afterFinishingGNU_" + afterFinishingGNUStr + extension)
 
 
-
+# Function to convert utc to local time, not used.
 #https://stackoverflow.com/questions/4770297/convert-utc-datetime-string-to-local-datetime
 def utc2local(utc):
     epoch = time.mktime(utc.timetuple())
     offset = datetime.fromtimestamp(epoch) - datetime.utcfromtimestamp(epoch)
     return utc + offset
 
-# if __name__=='__main__':
 def schedule(fileName, hackrf_index, fileDirectory):
     startUp = datetime.now()
     debuggerFile = open(
@@ -147,7 +30,7 @@ def schedule(fileName, hackrf_index, fileDirectory):
     print("Scheduler Starting Up. Time: " + str(startUp))
 
     sched = BlockingScheduler()
-
+    # BackgroundScheduler may be better suited, but we can't get it work. It'll schedule, but it won't execute.
     # sched = BackgroundScheduler()
 
     # Read the times from the input text file.
@@ -166,7 +49,7 @@ def schedule(fileName, hackrf_index, fileDirectory):
         reader = csv.reader(f, delimiter='\n')
         for row in reader:
             Str = str.split(row[0], ",")
-            # print("Raw String: "+Str[0])
+            # print("Raw String: "+Str[0]) %Debugging.
             h1 = datetime.strptime(Str[0], "%Y-%m-%dT%H:%M:%S.%f")
             Date.append(h1)
             Doppler.append(float(Str[1]))
@@ -177,26 +60,5 @@ def schedule(fileName, hackrf_index, fileDirectory):
             sched.add_job(my_job, 'date', run_date=h1, args=[Date[count],Doppler[count]-0.5,Doppler[count],
                    sampleRate,Length[count],fileDirectory,debuggerFile,hackrf_index])
             count += 1
-
-    # file1 = open("./DopplerAccess35932.txt")
-    # transform cannot do decimals or dates.
-
-
-
-    # stringAry=["2020-02-22T22:52:50.111","2020-02-22T22:52:50.111"]
-    # stringAry=["2020-02-22T18:25:32.436","2020-02-22T18:25:46.352"]
-
-    # count=0
-    # for Str in Date:
-    #     h1=datetime.strptime(Str,"%Y-%m-%dT%H:%M:%S.%f")
-    #     outStr="Before Schedule utc: "+str(h1)
-    #     print(outStr)
-    #     debuggerFile.write(outStr+'\n')
-    #     # h1=utc2local(h1)
-    #     # print("Before Schedule local: "+str(h1))
-    #     # sched.add_job(my_job,'date',run_date=h1,id='job'+str(count))
-    #     sched.add_job(my_job, 'date', run_date=h1, args=[Date[count], Doppler[count], Length[count], debuggerFile])
-    #     count += 1
-    # # sched.add_job(my_job, 'date', run_date=datetime(2020, 2, 22, 12, 36, 33,43534), args=['testing'])
 
     sched.start()
