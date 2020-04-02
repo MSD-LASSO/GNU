@@ -39,7 +39,7 @@ def filter(directoryToFiles,sampleRate,cutoff_freq):
                 outputName = directoryToFiles+'/pi'+str(i+1)+'_filtered/'+inputFile+".wav"
                 print("before calling GNU to filter signal")
 
-                # You can also call filterDemod_ref.py as a class in python instead of calling from the command line. 
+                # You can also call filterDemod_ref.py as a class in python instead of calling from the command line.
                 # This is exactly how one would call filterDemod_ref.py from the command line.
                 # NOTE: you must be in the directory containing filterDemod_ref.py
                 String='python filterDemod_ref.py --save-file='+outputName+' --source-file='+inputPath+' --cutoff-freq='+str(cutoff_freq)+' --samp-rate='+str(sampleRate)+' --trans-width=2000'
