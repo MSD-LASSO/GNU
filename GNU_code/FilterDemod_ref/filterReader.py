@@ -53,11 +53,12 @@ def argument_parser():
     parser.add_option(
         "", "--directory", dest="directoryToFiles", type="string", default="../../../../",
         help="Set the directory to find the folders labeled pi1 and pi2. ../ means go up 1 directory. THe classic path "
-             "to this code is GIT_GNU/GNU/GNU_code/FilterDemod_ref/ so 4 ../ brings us to the directory that"
+             "to this code is GIT_GNU/GNU/GNU_code/FilterDemod_ref/ so 4 ../ brings us to the directory that "
              "contains GIT_GNU/ [default=%default]")
     parser.add_option(
         "", "--sampleRate", dest="sampleRate", type="int", default=2000000,
-        help="The sampleRate that was used to collect the data files. [default=%default]")
+        help="The sampleRate that was used to collect the data files; usually 2,000,000 or 20,000,000."
+             " [default=%default]")
     parser.add_option(
         "", "--cutoff_freq", dest="cutoff_freq", type="int", default=80000,
         help="The cutoff frequency to use when filtering. Set narrower for narrower signals. 80,000 for reference, "
