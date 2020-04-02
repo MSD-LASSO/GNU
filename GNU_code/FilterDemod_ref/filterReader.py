@@ -1,21 +1,12 @@
 from os import walk
 from os import mkdir
 import os
+from optparse import OptionParser
 
 # filterReader will automatically filter signals using GNUradio program filterDemod_ref.
 
-def main():
-    # Path to directory to find the source files. This must be changed every time.
-    # The source files should be organized by pi. So under hailMaryLUSAT, there'd be directories pi1 and pi2.
-    # NOTE: ../ means go up 1 directory.
-    directoryToFiles = "../../../../hailMaryLUSAT/"
+def filter(directoryToFiles,sampleRate,cutoff_freq):
 
-    # Change the sample rate from 2million if applicable
-    sampleRate = 2000000
-
-    # cutoff_Freq is how wide the filter is. Narrower for narrower signals?
-    # cutoff_freq = 80000 #For reference signals
-    cutoff_freq = 5000 #For satellite signals
 
     # Iterate once for each pi.
     for i in range(2):
@@ -54,6 +45,32 @@ def main():
                 print(String)
                 os.system(String)
             j+=1
+
+def argument_parser():
+    parser = OptionParser(usage="%prog: [options]")
+    # Notice timedelta is 4 hours during daylight savings time
+    # Eastern Standard Time is 5 hours.
+    parser.add_option(
+        "", "--directory", dest="directoryToFiles", type="string", default="../../../../",
+        help="Set the directory to find the folders labeled pi1 and pi2. ../ means go up 1 directory. THe classic path "
+             "to this code is GIT_GNU/GNU/GNU_code/FilterDemod_ref/ so 4 ../ brings us to the directory that"
+             "contains GIT_GNU/ [default=%default]")
+    parser.add_option(
+        "", "--sampleRate", dest="sampleRate", type="int", default=2000000,
+        help="The sampleRate that was used to collect the data files. [default=%default]")
+    parser.add_option(
+        "", "--cutoff_freq", dest="cutoff_freq", type="int", default=80000,
+        help="The cutoff frequency to use when filtering. Set narrower for narrower signals. 80,000 for reference, "
+             "5,000 for satellites are good starting values. [default=%default]")
+    return parser
+
+
+def main(options=None):
+    if options is None:
+        options, _ = argument_parser().parse_args()
+
+    filter(options.directoryToFiles,options.sampleRate,options.cutoff_freq)
+
 
 if __name__ == '__main__':
     main()
