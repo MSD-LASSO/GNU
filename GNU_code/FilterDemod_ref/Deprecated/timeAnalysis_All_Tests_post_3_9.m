@@ -1,7 +1,22 @@
+% This script will calculate time_delays and adjust for clock
+% desynchronization based on the times given in the input files. The script
+% reads folders named pi1_filtered and pi2_filtered, both must be located
+% in the same directory, specified by mainPath.
+
+% For 20 different data files, the outputs are time_delay and offset.
+% Time_delay is a 20x1 matrix of the raw time_delays calculated from cross
+% correlation. Offset is a 20x5 vector where the first column is time_delay
+% and the next 4 columns adjust the time_delay by some constant, calculated
+% from the file names. 
+
+% The current accuracy of this method is ~3ms.
+
 %tester
 clearvars
 close all
 
+% Example Paths. These will need to be changed for your specific data
+% files.
 % mainPath='C:\Users\awian\Desktop\MSD\3_9_ref_only';
 % mainPath='C:\Users\awian\Desktop\MSD\3_12_ref_same_pi';
 % mainPath='C:\Users\awian\Desktop\MSD\3_13_same_pi_APS';
