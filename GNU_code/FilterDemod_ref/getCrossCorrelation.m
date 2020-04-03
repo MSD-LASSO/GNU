@@ -18,7 +18,6 @@
 
 clearvars
 close all
-addpath('../TdoaSim/')
 
 % Example Paths. These will need to be changed for your specific data
 % files.
